@@ -1,0 +1,22 @@
+﻿<Window x:Class="AuroraMinecarftLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AuroraMinecarftLauncher"
+        mc:Ignorable="d"
+        Title="Aurora Minecraft Launcher" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="213*"/>
+            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="66*"/>
+            <ColumnDefinition Width="398*"/>
+            <ColumnDefinition Width="87*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="启动游戏" HorizontalAlignment="Left" Height="62" Margin="174,336,0,0" VerticalAlignment="Top" Width="259" Grid.ColumnSpan="2" Grid.Column="4" Click="Button_Click"/>
+        <ComboBox HorizontalAlignment="Left" Height="29" Margin="174,289,0,0" VerticalAlignment="Top" Width="259" SelectionChanged="ComboBox_SelectionChanged" x:Name="version" Grid.ColumnSpan="2" Grid.Column="4" />
+
+    </Grid>
+</Window>
