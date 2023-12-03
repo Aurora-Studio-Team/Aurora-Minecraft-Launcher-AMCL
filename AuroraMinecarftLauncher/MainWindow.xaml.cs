@@ -28,6 +28,7 @@ using static System.Formats.Asn1.AsnWriter;
 using AuroraMinecarftLauncher.LoginUI;
 using StarLight_Core.Authentication;
 using System.Diagnostics;
+using AuroraMinecarftLauncher.LoginUI;
 
 namespace AuroraMinecarftLauncher
 {
@@ -60,13 +61,13 @@ namespace AuroraMinecarftLauncher
             java.ItemsSource = javaInfo;
 
             // 初始选择
-            version.SelectedItem = version.Items[0];
-            java.SelectedItem = java.Items[0];
+            version.SelectedItem = 0;
+            java.SelectedItem = 0;
             }
 
         public void GameStart()
         {
-            if (LiXian.IDT.Text != string.Empty&&java.Text != string.Empty&&version.Text != string.Empty&& MemoryTextbox.Text != string.Empty)
+            if (LoginUI.LiXian.OfflineID.Text != string.Empty&&java.Text != string.Empty&&version.Text != string.Empty&& MemoryTextbox.Text != string.Empty)
             {
                 try
                 {
@@ -76,7 +77,7 @@ namespace AuroraMinecarftLauncher
                     {
                         Version = ver, //Ver为Versions里你要启动的版本名字
                         MaxMemory = Convert.ToInt32(MemoryTextbox.Text), //最大内存，int类型
-                        Authenticator = new KMCCC.Authentication.OfflineAuthenticator(LiXian.IDT.Text), //离线启动，ZhaiSoul那儿为你要设置的游戏名
+                        Authenticator = new KMCCC.Authentication.OfflineAuthenticator(LoginUI.LiXian.OfflineID.Text), //离线启动，ZhaiSoul那儿为你要设置的游戏名
                         // Authenticator = new YggdrasilLogin("邮箱", "密码", true), // 正版启动，最后一个为是否twitch登录
                         Mode = LaunchMode.MCLauncher, //启动模式，这个我会在后面解释有哪几种
                                                       // Server = new ServerInfo { Address = "服务器IP地址", Port = "服务器端口" }, //设置启动游戏后，自动加入指定IP的服务器，可以不要
@@ -146,8 +147,9 @@ namespace AuroraMinecarftLauncher
             };
         }
         // 微软
-        private async Task Button_Click_2Async(object sender, RoutedEventArgs e)
+        private async Task Button_Click_2(object sender, RoutedEventArgs e)
         {
+            /*
             var V = MessageBox.Show("确定开始验证您的账户", "验证", MessageBoxButton.OKCancel);
             MicrosoftAuthenticator microsoftAuthenticator = new(MinecaftOAuth.Module.Enum.AuthType.Access)
             {
@@ -171,6 +173,12 @@ namespace AuroraMinecarftLauncher
             });
             UserInfo = user;
             Debug.WriteLine("欢迎回来, {0}", user.Name);
+            */
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -20,9 +20,11 @@ namespace AuroraMinecarftLauncher.LoginUI
     /// </summary>
     public partial class LiXian : Page
     {
+        public static TextBox OfflineID {get; set;}
         public LiXian()
         {
             InitializeComponent();
+            OfflineID = IDTextbox;
         }
 
 

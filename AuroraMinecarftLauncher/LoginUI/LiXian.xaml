@@ -9,6 +9,6 @@
       Title="LiXian">
 
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="-2,116,0,0" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Width="149" x:Name="IDT"  TextChanged="IDT"/>
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="-2,116,0,0" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Width="149" x:Name="IDTextbox"  TextChanged="IDT"/>
     </Grid>
 </Page>

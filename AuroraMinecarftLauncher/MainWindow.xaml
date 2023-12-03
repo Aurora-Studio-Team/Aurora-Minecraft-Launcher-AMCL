@@ -27,7 +27,7 @@
         <Label Grid.Column="1" Content="设置最大内存(单位：MB" HorizontalAlignment="Left" Height="24" Margin="13,69,0,0" VerticalAlignment="Top" Width="150"/>
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="18,95,0,0" TextWrapping="Wrap" Text="1024" VerticalAlignment="Top" Width="169" x:Name="MemoryTextbox" TextChanged="MemoryTextbox_TextChanged"/>
         <ContentControl Grid.Column="5" Content="ContentControl" HorizontalAlignment="Left" Height="150" Margin="8,48,0,0" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
-        <Button Grid.Column="5" Content="微软登录" HorizontalAlignment="Left" Height="28" Margin="3,10,0,0" VerticalAlignment="Top" Width="60" RenderTransformOrigin="1.545,0.331" Click="Button_Click_2"/>
+        <Button Grid.Column="5" Content="微软登录" HorizontalAlignment="Left" Height="28" Margin="3,10,0,0" VerticalAlignment="Top" Width="60" RenderTransformOrigin="1.545,0.331" Click="ButtonBase_OnClick"/>
         <Button Grid.Column="5" Content="离线登录" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="28" Margin="101,10,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click_1" x:Name="LiXian"/>
 
     </Grid>
