@@ -141,9 +141,9 @@ namespace AuroraMinecarftLauncher
         // 离线
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            LiXian.Content = new Frame
+            LoginControl.Content = new Frame
             {
-                Content = LiXian
+                Content = Lixian
             };
         }
         // 微软
