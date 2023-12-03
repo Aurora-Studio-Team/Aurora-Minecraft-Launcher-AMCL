@@ -16,7 +16,6 @@ using System.Windows.Shapes;
 using KMCCC.Authentication;
 using KMCCC.Launcher;
 
-
 namespace AuroraMinecarftLauncher
 {
     /// <summary>
