@@ -3,20 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AuroraMinecarftLauncher"
         mc:Ignorable="d"
         Title="Aurora Minecraft Launcher" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="0,0,-3,2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="213*"/>
             <ColumnDefinition Width="31*"/>
             <ColumnDefinition Width="66*"/>
-            <ColumnDefinition Width="398*"/>
-            <ColumnDefinition Width="87*"/>
+            <ColumnDefinition Width="247*"/>
+            <ColumnDefinition Width="151*"/>
+            <ColumnDefinition Width="68*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="15*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="启动游戏" HorizontalAlignment="Left" Height="62" Margin="174,336,0,0" VerticalAlignment="Top" Width="259" Grid.ColumnSpan="2" Grid.Column="4" Click="Button_Click"/>
-        <ComboBox HorizontalAlignment="Left" Height="29" Margin="174,289,0,0" VerticalAlignment="Top" Width="259" SelectionChanged="ComboBox_SelectionChanged" x:Name="version" Grid.ColumnSpan="2" Grid.Column="4" />
+        <Button Content="Button" Width="0"/>
+        <Button Grid.Column="4" Content="启动游戏" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="87" Margin="216,299,0,0" VerticalAlignment="Top" Width="224" Click="Button_Click"/>
+        <ComboBox Grid.Column="4" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="30" Margin="217,253,0,0" VerticalAlignment="Top" Width="224" x:Name="version" DisplayMemberPath="Id" SelectionChanged="ComboBox_SelectionChanged"/>
+        <Label Grid.Column="4" Content="选择版本" HorizontalAlignment="Left" Height="25" Margin="215,227,0,0" VerticalAlignment="Top" Width="68" Grid.ColumnSpan="2"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="15,41,0,0" VerticalAlignment="Top" Width="173" x:Name="java" SelectionChanged="javaCombo_SelectionChanged"/>
+        <Label Grid.Column="1" Content="选择您的Java" HorizontalAlignment="Left" Height="25" Margin="14,12,0,0" VerticalAlignment="Top" Width="93"/>
+        <Label Grid.Column="1" Content="设置最大内存(单位：MB" HorizontalAlignment="Left" Height="24" Margin="13,69,0,0" VerticalAlignment="Top" Width="150"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="18,95,0,0" TextWrapping="Wrap" Text="1024" VerticalAlignment="Top" Width="169" x:Name="MemoryTextbox" TextChanged="MemoryTextbox_TextChanged"/>
+        <ContentControl Grid.Column="5" Content="ContentControl" HorizontalAlignment="Left" Height="150" Margin="8,48,0,0" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
+        <Button Grid.Column="5" Content="微软登录" HorizontalAlignment="Left" Height="28" Margin="3,10,0,0" VerticalAlignment="Top" Width="60" RenderTransformOrigin="1.545,0.331" Click="Button_Click_2"/>
+        <Button Grid.Column="5" Content="离线登录" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="28" Margin="101,10,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click_1" x:Name="LiXian"/>
 
     </Grid>
 </Window>
