@@ -25,6 +25,7 @@ namespace AuroraMinecarftLauncher.LoginUI
         {
             InitializeComponent();
             OfflineID = IDTextbox;
+
         }
 
 

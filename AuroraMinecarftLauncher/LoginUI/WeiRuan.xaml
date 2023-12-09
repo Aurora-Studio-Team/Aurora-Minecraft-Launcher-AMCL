@@ -9,6 +9,9 @@
       Title="WeiRuan">
 
     <Grid>
-        
+        <Button Content="Microsoft登录" HorizontalAlignment="Center" Height="24" Margin="0,125,0,0" VerticalAlignment="Top" Width="106" Click="Button_Click"/>
+        <Image HorizontalAlignment="Left" Height="60" Margin="43,22,0,0" VerticalAlignment="Top" Width="60" x:Name="userImge"/>
+        <TextBlock Block.TextAlignment="Center" HorizontalAlignment="Center" Height="18" Margin="0,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" x:Name="userName"/>
+
     </Grid>
 </Page>

@@ -10,5 +10,6 @@
 
     <Grid>
         <TextBox HorizontalAlignment="Left" Height="32" Margin="-2,116,0,0" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Width="149" x:Name="IDTextbox"  TextChanged="IDT"/>
+        <Image  Source=".\img\Steve.jpg" Height="110" Width="110" Margin="18,1,22,39"/>
     </Grid>
 </Page>

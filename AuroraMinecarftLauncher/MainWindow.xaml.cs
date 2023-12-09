@@ -29,13 +29,14 @@ using AuroraMinecarftLauncher.LoginUI;
 using StarLight_Core.Authentication;
 using System.Diagnostics;
 using AuroraMinecarftLauncher.LoginUI;
+using Natsurainko.FluentCore.Interface;
 
 namespace AuroraMinecarftLauncher
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : WindowX
     {
 
         LoginUI.LiXian Lixian = new LoginUI.LiXian();
@@ -52,7 +53,6 @@ namespace AuroraMinecarftLauncher
             version.ItemsSource = versions;//绑定数据源
             version.DisplayMemberPath = "Id";//设置comboBox显示的为版本Id
 
-            // 有点问题，需要改改，先写正版
             // 自动寻找Java
             var javaInfo = JavaUtil.GetJavas();
             string javaPath = javaInfo.First().JavaPath;
@@ -63,11 +63,11 @@ namespace AuroraMinecarftLauncher
             // 初始选择
             version.SelectedItem = 0;
             java.SelectedItem = 0;
-            }
+        }
 
         public void GameStart()
         {
-            if (LoginUI.LiXian.OfflineID.Text != string.Empty&&java.Text != string.Empty&&version.Text != string.Empty&& MemoryTextbox.Text != string.Empty)
+            if (LoginUI.LiXian.OfflineID.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
             {
                 try
                 {
@@ -133,7 +133,7 @@ namespace AuroraMinecarftLauncher
         {
 
         }
-
+        // 启动
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             GameStart();
@@ -141,45 +141,29 @@ namespace AuroraMinecarftLauncher
         // 离线
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            LiXian.Content = new Frame
+            LoginControl.Content = new Frame
             {
-                Content = LiXian
+                Content = Lixian
             };
         }
         // 微软
-        private async Task Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            /*
-            var V = MessageBox.Show("确定开始验证您的账户", "验证", MessageBoxButton.OKCancel);
-            MicrosoftAuthenticator microsoftAuthenticator = new(MinecaftOAuth.Module.Enum.AuthType.Access)
-            {
-                ClientId = "ed0e15b9-fa1e-489b-b83d-7a66ff149abd"
-            };
-            var code = await microsoftAuthenticator.GetDeviceInfo();
-            MessageBox.Show(code.UserCode, "你的一次性访问代码 确定开始验证账户");
-            Debug.WriteLine("Link:{0} - Code:{1}", code.VerificationUrl, code.UserCode);
-            if (V == MessageBoxResult.OK)
-            {
-                Process.Start(new ProcessStartInfo(code.VerificationUrl)
-                {
-                    UseShellExecute = true,
-                    Verb = "open"
-                });
-            }
-            var token = await microsoftAuthenticator.GetTokenResponse(code);
-            var user = await microsoftAuthenticator.AuthAsync(x =>
-            {
-                Debug.WriteLine(x);
-            });
-            UserInfo = user;
-            Debug.WriteLine("欢迎回来, {0}", user.Name);
-            */
-        }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            LoginControl.Content = new Frame
+            {
+                Content = WeiRuan
+            };
+        }
+        // 下载页-刷新
+        private async void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        // 下载页-安装
+        private async void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
-
