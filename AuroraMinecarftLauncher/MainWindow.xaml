@@ -78,7 +78,7 @@
             <TabItem Header="下载" Height="70" Width="150">
                 <Grid Width="636" Margin="0,-4,0,-4">
                     <Expander HorizontalAlignment="Left" Height="69" Header="Minecarft" Margin="45,18,0,0" VerticalAlignment="Top" Width="541">
-                        <ListBox x:Name="DL" HorizontalAlignment="Left" Height="290" Margin="-6,0,0,0" VerticalAlignment="Top" Width="541" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListBox x:Name="DL" HorizontalAlignment="Left" Height="290" Margin="-6,0,0,0" VerticalAlignment="Top" Width="541" SelectionChanged="DL_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -96,7 +96,7 @@
                     </Expander>
                     <Button Content="安装此版本" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="44" Width="118" Margin="4,0,0,26" Click="Button_Click_3"/>
                     <Button Margin="149,374,0,26" Content="刷新版本列表" HorizontalAlignment="Left" Click="Button_Click_4" Width="107"/>
-                    <ProgressBar x:Name="jdt" Margin="274,374,10,26"/>
+                    <ProgressBar x:Name="jdt" Margin="274,374,10,26" ValueChanged="jdt_ValueChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="设置" Height="70" Width="150">

@@ -25,7 +25,6 @@ using StarLight_Core.Utilities;
 using StarLight_Core.Models.Utilities;
 using Newtonsoft.Json.Linq;
 using static System.Formats.Asn1.AsnWriter;
-using AuroraMinecarftLauncher.LoginUI;
 using StarLight_Core.Authentication;
 using System.Diagnostics;
 using MinecraftOAuth.Module;
@@ -35,6 +34,8 @@ using MinecraftLaunch.Modules.Models.Auth;
 using Natsurainko.FluentCore.Module.Authenticator;
 using MinecraftLaunch.Modules.Installer;
 using MinecraftLaunch.Modules.Models.Install;
+using System.Net.Http;
+using System.IO.Compression;
 
 namespace AuroraMinecarftLauncher
 {
@@ -48,10 +49,27 @@ namespace AuroraMinecarftLauncher
 
         public static LauncherCore Core = LauncherCore.Create();
 
+        private HttpClient _httpClient;
+
+        // 下载&安装路径
+        private string downloadPath = ".minecraft/versions/";
+        private string installPath = ".minecraft/versions/";
+
+        public int jdt { get; set; }
+        public void jdt()
+        {
+            // ...
+        }
+
         // 配置项
         public MainWindow()
         {
             InitializeComponent();
+
+            _httpClient = new HttpClient();
+
+            
+
             // 自动寻找版本
             var versions = Core.GetVersions().ToArray();
             version.ItemsSource = versions;//绑定数据源
@@ -71,7 +89,7 @@ namespace AuroraMinecarftLauncher
 
         public void GameStart()
         {
-            if (LoginUI.LiXian.OfflineID.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
+            if (IDTextbox.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
             {
                 try
                 {
@@ -81,7 +99,7 @@ namespace AuroraMinecarftLauncher
                     {
                         Version = ver, //Ver为Versions里你要启动的版本名字
                         MaxMemory = Convert.ToInt32(MemoryTextbox.Text), //最大内存，int类型
-                        Authenticator = new KMCCC.Authentication.OfflineAuthenticator(LoginUI.LiXian.OfflineID.Text), //离线启动，ZhaiSoul那儿为你要设置的游戏名
+                        Authenticator = new KMCCC.Authentication.OfflineAuthenticator(IDTextbox.Text), //离线启动，ZhaiSoul那儿为你要设置的游戏名
                         // Authenticator = new YggdrasilLogin("邮箱", "密码", true), // 正版启动，最后一个为是否twitch登录
                         Mode = LaunchMode.MCLauncher, //启动模式，这个我会在后面解释有哪几种
                                                       // Server = new ServerInfo { Address = "服务器IP地址", Port = "服务器端口" }, //设置启动游戏后，自动加入指定IP的服务器，可以不要
@@ -168,17 +186,6 @@ namespace AuroraMinecarftLauncher
             
         }
 
-        // 下载页-刷新
-        private async void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            
-        }
-        // 下载页-安装
-        private async void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void IDT(object sender, TextChangedEventArgs e)
         {
 
@@ -196,7 +203,7 @@ namespace AuroraMinecarftLauncher
         // LittleSkin-Start
         private void LStart(object sender, RoutedEventArgs e)
         {
-           
+
         }
         //统一通行证
         // 服务器ID
@@ -212,12 +219,82 @@ namespace AuroraMinecarftLauncher
         // 密码
         private void TPassword_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
         }
         // 启动
         private void TStart(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        // 下载页-版本列表
+        private async void DL_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string downloadUrl = $"https://bmclapi2.bangbang93.com/version/{version}/client"; // 版本下载API URL稍作调整
+            string downloadPath = System.IO.Path.Combine(".minecraft", $"{version}.jar");
+
+            using (var response = await _httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var totalBytes = response.Content.Headers.ContentLength ?? 0L;
+                    var readBytes = 0L;
+                    var buffer = new byte[8192];
+                    var isMoreToRead = true;
+
+                    using (var fileStream = new System.IO.FileStream(downloadPath, System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None))
+                    {
+                        using (var stream = await response.Content.ReadAsStreamAsync())
+                        {
+                            do
+                            {
+                                var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                                if (bytesRead == 0)
+                                {
+                                    isMoreToRead = false;
+                                    continue;
+                                }
+
+                                await fileStream.WriteAsync(buffer, 0, bytesRead);
+
+                                readBytes += bytesRead;
+                                jdt(readBytes, totalBytes);
+                            }
+                            while (isMoreToRead);
+
+                            MessageBox.Show("下载完成！");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"下载失败：{response.ReasonPhrase}");
+                }
+            }
+        }
+        // 下载页-安装
+        private async void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            ZipFile.ExtractToDirectory(downloadPath, installPath, true);
+
+            // 进行额外的安装步骤
+            // 比如移动文件到正确的位置，编辑配置文件等
+
+            MessageBox.Show("安装完成！");
+        }
+
+        // 下载页-刷新
+        private async void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DL.ItemsSource = await GetMinecraftVersions();
+                MessageBox.Show("版本列表已更新。");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"无法刷新版本列表: {ex.Message}");
+            }
         }
     }
 }
