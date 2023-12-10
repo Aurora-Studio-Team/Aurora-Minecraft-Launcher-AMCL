@@ -8,49 +8,95 @@
         Title="Aurora Minecraft Launcher" Height="450" Width="800">
     <Grid Margin="0,0,-3,2">
 
-        <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Height="420" Margin="5,0,0,0" VerticalAlignment="Center" Width="800" RenderTransformOrigin="0.432,0.488" Grid.ColumnSpan="2">
+        <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Height="436" Margin="5,0,0,0" VerticalAlignment="Center" Width="790" RenderTransformOrigin="0.432,0.488">
             <TabItem Header="启动" Height="70" Width="150">
-                <Grid Margin="0,-8,0,8">
-                    <Button Content="离线登录" HorizontalAlignment="Left" Height="28" Margin="510,44,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click_1" x:Name="LiXian"/>
-                    <Button Content="启动游戏" HorizontalAlignment="Left" Height="87" Margin="380,318,0,0" VerticalAlignment="Top" Width="224" Click="Button_Click"/>
-                    <ComboBox HorizontalAlignment="Left" Height="30" Margin="381,277,0,0" VerticalAlignment="Top" Width="224" x:Name="version" DisplayMemberPath="Id" SelectionChanged="ComboBox_SelectionChanged"/>
-                    <Label Content="选择版本" HorizontalAlignment="Left" Height="25" Margin="379,252,0,0" VerticalAlignment="Top" Width="68"/>
-                    <ContentControl x:Name="LoginControl" Content="" HorizontalAlignment="Left" Height="150" Margin="414,91,0,0" VerticalAlignment="Top" Width="150"/>
-                    <Button Content="微软登录" HorizontalAlignment="Left" Height="28" Margin="407,44,0,0" VerticalAlignment="Top" Width="60" RenderTransformOrigin="1.545,0.331" Click="ButtonBase_OnClick"/>
+                <Grid Margin="0,-9,0,0" Width="637">
+
+                    <ComboBox HorizontalAlignment="Left" Height="30" Margin="103,376,0,0" VerticalAlignment="Top" Width="163" x:Name="version" DisplayMemberPath="Id" SelectionChanged="ComboBox_SelectionChanged" RenderTransformOrigin="0.506,0.575"/>
+                    <Label Content="选择版本" HorizontalAlignment="Left" Height="25" Margin="106,349,0,0" VerticalAlignment="Top" Width="68" RenderTransformOrigin="0.115,0.899"/>
+                    <TabControl HorizontalAlignment="Left" Height="313" Margin="48,35,0,0" VerticalAlignment="Top" Width="268">
+                        <TabItem Header="微软登录">
+                            <Grid Margin="0,0,13,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35*"/>
+                                    <ColumnDefinition Width="22*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Content="启动游戏" HorizontalAlignment="Left" Height="77" Margin="49,209,0,0" VerticalAlignment="Top" Width="161" Click="ZB_Start" Grid.ColumnSpan="2"/>
+                                <Button Content="登录Microsoft账户" HorizontalAlignment="Left" Height="30" Margin="50,169,0,0" VerticalAlignment="Top" Width="160" Click="Button_Click_1" Grid.ColumnSpan="2"/>
+                                <TextBlock Grid.ColumnSpan="2" Block.TextAlignment="Center" HorizontalAlignment="Left" Height="27" Margin="57,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145" x:Name="userName"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="离线登录" RenderTransformOrigin="0.576,0.429">
+                            <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,-4,0" Height="332">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25*"/>
+                                    <ColumnDefinition Width="31*"/>
+                                    <ColumnDefinition Width="118*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Grid.RenderTransform>
+                                <TextBox HorizontalAlignment="Left" Height="32" Margin="21,155,0,0" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Width="148" x:Name="IDTextbox"  TextChanged="IDT" RenderTransformOrigin="0.496,0.653" Grid.ColumnSpan="2" Grid.Column="1"/>
+                                <Image Source="pack://application:,,,/img/Steve.jpg" Height="110" Width="110" Margin="39,23,84,199" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                <Button Content="启动游戏" HorizontalAlignment="Left" Height="77" Margin="7,200,0,0" VerticalAlignment="Top" Width="176" Click="Button_Click" Grid.ColumnSpan="2" Grid.Column="1"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="第三方登录">
+                            <TabControl>
+                                <TabItem Header="LittleSkin" Width="120">
+                                    <Grid>
+                                        <TextBox x:Name="LEamil" Text="" Margin="75,34,13,194" Height="25" Width="180" TextChanged="LEamil_TextChanged"/>
+                                        <TextBox x:Name="LPassword" Text="" Margin="74,78,14,150" Height="25" Width="180" TextChanged="LPassword_TextChanged"/>
+                                        <Label Content="邮箱：" HorizontalAlignment="Left" Height="25" Margin="16,34,0,0" VerticalAlignment="Top" Width="50"/>
+                                        <Label Content="密码：" HorizontalAlignment="Left" Height="25" Margin="14,78,0,0" VerticalAlignment="Top" Width="50"/>
+                                        <Button Content="启动游戏" HorizontalAlignment="Left" Height="77" Margin="48,178,0,0" VerticalAlignment="Top" Width="161" Click="LStart"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="统一通行证" Width="120">
+                                    <Grid>
+                                        <Label Content="邮箱：" HorizontalAlignment="Left" Height="25" Margin="17,52,0,0" VerticalAlignment="Top" Width="50"/>
+                                        <Label Content="密码：" HorizontalAlignment="Left" Height="25" Margin="15,86,0,0" VerticalAlignment="Top" Width="50"/>
+                                        <TextBox x:Name="TEamil" Text="" Margin="79,52,9,176" Height="25" Width="180" TextChanged="TEamil_TextChanged"/>
+                                        <TextBox x:Name="TPassword" Text="" Margin="78,87,10,141" Height="25" Width="180" TextChanged="TPassword_TextChanged"/>
+                                        <TextBox x:Name="ServerID" Text="" Margin="78,18,10,210" Height="25" Width="180" TextChanged="ServerID_TextChanged"/>
+                                        <Label Content="服务器ID：" HorizontalAlignment="Left" Height="25" Margin="12,19,0,0" VerticalAlignment="Top" Width="75"/>
+                                        <Button Content="启动游戏" HorizontalAlignment="Left" Height="77" Margin="48,178,0,0" VerticalAlignment="Top" Width="161" Click="TStart"/>
+                                    </Grid>
+                                </TabItem>
+
+                            </TabControl>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
             </TabItem>
             <TabItem Header="下载" Height="70" Width="150">
-                <Grid Width="636" Margin="0,0,0,-8">
-                    <Expander HorizontalAlignment="Left" Height="30" Header="模组列表" Margin="22,2,0,0" VerticalAlignment="Top" Width="595">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="225*"/>
-                                <ColumnDefinition Width="364*"/>
-                            </Grid.ColumnDefinitions>
-                            <ListBox x:Name="dList" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="{Binding Id}" FontWeight="Bold" FontSize="14"/>
-                                                <TextBlock><Run Text="发布时间："/><Run Text=" "/><Run Text="{Binding ReleaseTime}"/></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                            <Button Content="安装此版本" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="113" Margin="103,0,0,-380" Click="Button_Click_3" RenderTransformOrigin="0.483,-0.625"/>
-                            <Button Margin="-17,340,0,-380" Content="刷新版本列表" HorizontalAlignment="Left" Click="Button_Click_4" RenderTransformOrigin="4.262,-3.835" Height="40" Width="105"/>
-                            <ProgressBar x:Name="jdt" Margin="1,342,-13,-379" Grid.Column="1"/>
-                        </Grid>
+                <Grid Width="636" Margin="0,-4,0,-4">
+                    <Expander HorizontalAlignment="Left" Height="69" Header="Minecarft" Margin="45,18,0,0" VerticalAlignment="Top" Width="541">
+                        <ListBox x:Name="DL" HorizontalAlignment="Left" Height="290" Margin="-6,0,0,0" VerticalAlignment="Top" Width="541" d:ItemsSource="{d:SampleData ItemCount=5}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="{Binding Id}" FontWeight="Bold" FontSize="14"/>
+                                            <TextBlock>
+                                                <Run Text="发布时间："/>
+                                                <Run Text="{Binding ReleaseTime}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Expander>
-
-                </Grid>
-            </TabItem>
-            <TabItem Header="联机" Height="70" Width="150">
-                <Grid Margin="-1,-8,1,8">
-                    <TextBlock HorizontalAlignment="Left" Height="62" Margin="150,199,0,0" TextWrapping="Wrap" Text="敬请期待！" VerticalAlignment="Top" Width="308"/>
-
+                    <Button Content="安装此版本" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="44" Width="118" Margin="4,0,0,26" Click="Button_Click_3"/>
+                    <Button Margin="149,374,0,26" Content="刷新版本列表" HorizontalAlignment="Left" Click="Button_Click_4" Width="107"/>
+                    <ProgressBar x:Name="jdt" Margin="274,374,10,26"/>
                 </Grid>
             </TabItem>
             <TabItem Header="设置" Height="70" Width="150">

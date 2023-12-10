@@ -28,8 +28,13 @@ using static System.Formats.Asn1.AsnWriter;
 using AuroraMinecarftLauncher.LoginUI;
 using StarLight_Core.Authentication;
 using System.Diagnostics;
-using AuroraMinecarftLauncher.LoginUI;
-using Natsurainko.FluentCore.Interface;
+using MinecraftOAuth.Module;
+using Natsurainko.FluentCore.Extension.Windows.Service;
+using MinecraftLaunch.Modules.Models.Launch;
+using MinecraftLaunch.Modules.Models.Auth;
+using Natsurainko.FluentCore.Module.Authenticator;
+using MinecraftLaunch.Modules.Installer;
+using MinecraftLaunch.Modules.Models.Install;
 
 namespace AuroraMinecarftLauncher
 {
@@ -38,9 +43,8 @@ namespace AuroraMinecarftLauncher
     /// </summary>
     public partial class MainWindow : WindowX
     {
-
-        LoginUI.LiXian Lixian = new LoginUI.LiXian();
-        LoginUI.WeiRuan WeiRuan = new LoginUI.WeiRuan();
+        public static LaunchConfig LaunchConfig { get; } = new LaunchConfig();
+        public Account UserInfo {get; private set; }
 
         public static LauncherCore Core = LauncherCore.Create();
 
@@ -61,8 +65,8 @@ namespace AuroraMinecarftLauncher
             java.ItemsSource = javaInfo;
 
             // 初始选择
-            version.SelectedItem = 0;
-            java.SelectedItem = 0;
+            version.SelectedItem = 1;
+            java.SelectedItem = 1;
         }
 
         public void GameStart()
@@ -114,6 +118,7 @@ namespace AuroraMinecarftLauncher
             }
         }
 
+
         private void javaCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
@@ -133,28 +138,36 @@ namespace AuroraMinecarftLauncher
         {
 
         }
-        // 启动
+        // 启动页-离线启动
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             GameStart();
         }
-        // 离线
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            LoginControl.Content = new Frame
-            {
-                Content = Lixian
-            };
-        }
-        // 微软
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        // 启动页-微软登录
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            LoginControl.Content = new Frame
+            string clientId = "e1e383f9-59d9-4aa2-bf5e-73fe83b15ba0";
+            var deviceCodeInfo = await MicrosoftAuthentication.RetrieveDeviceCodeInfo(clientId);
+            System.Diagnostics.Process.Start("explorer.exe", deviceCodeInfo.VerificationUri);
+            MessageBox.Show("在浏览器中输入您的验证代码：" + deviceCodeInfo.UserCode, "Microsoft登录");
+            var tokenInfo = await MicrosoftAuthentication.GetTokenResponse(deviceCodeInfo);
+            var userInfo = await MicrosoftAuthentication.MicrosoftAuthAsync(tokenInfo, x =>
             {
-                Content = WeiRuan
-            };
+                Console.WriteLine(x);
+
+            });
+            MessageBox.Show("欢迎回来！" + userInfo.Name, "欢迎");
+            userName.Text = userInfo.Name;
+            // userImge.Source = new BitmapImage(new Uri("@https://crafatar.com/avatars/"+userInfo.Name));
         }
+
+        // 启动页-正版启动
+        private void ZB_Start(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
         // 下载页-刷新
         private async void Button_Click_4(object sender, RoutedEventArgs e)
         {
@@ -164,6 +177,47 @@ namespace AuroraMinecarftLauncher
         private async void Button_Click_3(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void IDT(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        // LittleSKin-Email
+        private void LEamil_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        // LittleSkin-Password
+        private void LPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        // LittleSkin-Start
+        private void LStart(object sender, RoutedEventArgs e)
+        {
+           
+        }
+        //统一通行证
+        // 服务器ID
+        private void ServerID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        // 邮箱
+        private void TEamil_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        // 密码
+        private void TPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+        // 启动
+        private void TStart(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
