@@ -55,8 +55,8 @@ namespace AuroraMinecarftLauncher
         private string downloadPath = ".minecraft/versions/";
         private string installPath = ".minecraft/versions/";
 
-        public int jdt { get; set; }
-        public void jdt()
+        public int Jdt { get; set; }
+        public void jdt1()
         {
             // ...
         }
@@ -258,7 +258,7 @@ namespace AuroraMinecarftLauncher
                                 await fileStream.WriteAsync(buffer, 0, bytesRead);
 
                                 readBytes += bytesRead;
-                                jdt(readBytes, totalBytes);
+                                jdt1(readBytes, totalBytes);
                             }
                             while (isMoreToRead);
 
