@@ -1,48 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 // 导入的模块
 using KMCCC.Launcher;
-using KMCCC.Authentication;
-using KMCCC.Modules.JVersion;
-using KMCCC.Modules.Minecraft;
-using Panuon.UI.Silver;
 using StarLight_Core.Utilities;
-using StarLight_Core.Models.Utilities;
-using Newtonsoft.Json.Linq;
-using static System.Formats.Asn1.AsnWriter;
 using StarLight_Core.Authentication;
-using System.Diagnostics;
-using MinecraftOAuth.Module;
-using Natsurainko.FluentCore.Extension.Windows.Service;
 using MinecraftLaunch.Modules.Models.Launch;
 using MinecraftLaunch.Modules.Models.Auth;
-using Natsurainko.FluentCore.Module.Authenticator;
-using MinecraftLaunch.Modules.Installer;
-using MinecraftLaunch.Modules.Models.Install;
 using System.Net.Http;
-using System.IO.Compression;
 
 namespace AuroraMinecarftLauncher
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : WindowX
+    public partial class MainWindow : Window
     {
         public static LaunchConfig LaunchConfig { get; } = new LaunchConfig();
         public Account UserInfo {get; private set; }
@@ -55,11 +29,6 @@ namespace AuroraMinecarftLauncher
         private string downloadPath = ".minecraft/versions/";
         private string installPath = ".minecraft/versions/";
 
-        public int Jdt { get; set; }
-        public void jdt1()
-        {
-            // ...
-        }
 
         // 配置项
         public MainWindow()
@@ -87,56 +56,6 @@ namespace AuroraMinecarftLauncher
             java.SelectedItem = 1;
         }
 
-        public void GameStart()
-        {
-            if (IDTextbox.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
-            {
-                try
-                {
-                    Core.JavaPath = java.SelectedValue + "\\javaw.exe";
-                    var ver = (KMCCC.Launcher.Version)version.SelectedItem;
-                    var result = Core.Launch(new LaunchOptions
-                    {
-                        Version = ver, //Ver为Versions里你要启动的版本名字
-                        MaxMemory = Convert.ToInt32(MemoryTextbox.Text), //最大内存，int类型
-                        Authenticator = new KMCCC.Authentication.OfflineAuthenticator(IDTextbox.Text), //离线启动，ZhaiSoul那儿为你要设置的游戏名
-                        // Authenticator = new YggdrasilLogin("邮箱", "密码", true), // 正版启动，最后一个为是否twitch登录
-                        Mode = LaunchMode.MCLauncher, //启动模式，这个我会在后面解释有哪几种
-                                                      // Server = new ServerInfo { Address = "服务器IP地址", Port = "服务器端口" }, //设置启动游戏后，自动加入指定IP的服务器，可以不要
-                                                      // Size = new WindowSize { Height = 768, Width = 1280 } //设置窗口大小，可以不要
-                    });
-                    // 错误提示
-                    if (!result.Success)
-                    {
-                        switch (result.ErrorType)
-                        {
-                            case ErrorType.NoJAVA:
-                                MessageBoxX.Show("Java错误！详细信息：" + result.ErrorMessage, "错误！");
-                                break;
-                            case ErrorType.AuthenticationFailed:
-                                MessageBoxX.Show("登录时发生错误！详细信息：" + result.ErrorMessage, "错误！");
-                                break;
-                            case ErrorType.UncompressingFailed:
-                                MessageBoxX.Show("文件错误！详细信息：" + result.ErrorMessage, "错误！");
-                                break;
-                            default:
-                                MessageBoxX.Show(result.ErrorMessage, "错误！");
-                                break;
-                        }
-                    }
-                }
-                catch
-                {
-                    MessageBoxX.Show("启动失败！", "错误！");
-                }
-            }
-            else
-            {
-                MessageBoxX.Show("信息不完整！", "错误！");
-            }
-        }
-
-
         private void javaCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
@@ -159,13 +78,56 @@ namespace AuroraMinecarftLauncher
         // 启动页-离线启动
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GameStart();
+            if (IDTextbox.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
+            {
+                try
+                {
+                    Core.JavaPath = java.SelectedValue + "\\javaw.exe";
+                    var ver = (KMCCC.Launcher.Version)version.SelectedItem;
+                    var result = Core.Launch(new LaunchOptions
+                    {
+                        Version = ver, //Ver为Versions里你要启动的版本名字
+                        MaxMemory = Convert.ToInt32(MemoryTextbox.Text), //最大内存，int类型
+                        Authenticator = new KMCCC.Authentication.OfflineAuthenticator(IDTextbox.Text), //离线启动，ZhaiSoul那儿为你要设置的游戏名
+                        //Authenticator = new YggdrasilLogin("邮箱", "密码", false), // 正版启动，最后一个为是否twitch登录
+                        Mode = LaunchMode.MCLauncher,
+
+                    });
+                    // 错误提示
+                    if (!result.Success)
+                    {
+                        switch (result.ErrorType)
+                        {
+                            case ErrorType.NoJAVA:
+                                MessageBox.Show("Java错误！详细信息：" + result.ErrorMessage, "错误！");
+                                break;
+                            case ErrorType.AuthenticationFailed:
+                                MessageBox.Show("登录时发生错误！详细信息：" + result.ErrorMessage, "错误！");
+                                break;
+                            case ErrorType.UncompressingFailed:
+                                MessageBox.Show("文件错误！详细信息：" + result.ErrorMessage, "错误！");
+                                break;
+                            default:
+                                MessageBox.Show(result.ErrorMessage, "错误！");
+                                break;
+                        }
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("启动失败！", "错误！");
+                }
+            }
+            else
+            {
+                MessageBox.Show("信息不完整！", "错误！");
+            }
         }
 
         // 启动页-微软登录
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string clientId = "e1e383f9-59d9-4aa2-bf5e-73fe83b15ba0";
+            string clientId = "a0ceb477-0738-47fa-8c93-52d892aa866a";
             var deviceCodeInfo = await MicrosoftAuthentication.RetrieveDeviceCodeInfo(clientId);
             System.Diagnostics.Process.Start("explorer.exe", deviceCodeInfo.VerificationUri);
             MessageBox.Show("在浏览器中输入您的验证代码：" + deviceCodeInfo.UserCode, "Microsoft登录");
@@ -203,7 +165,49 @@ namespace AuroraMinecarftLauncher
         // LittleSkin-Start
         private void LStart(object sender, RoutedEventArgs e)
         {
+            if (IDTextbox.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
+            {
+                try
+                {
+                    Core.JavaPath = java.SelectedValue + "\\javaw.exe";
+                    var ver = (KMCCC.Launcher.Version)version.SelectedItem;
+                    var result = Core.Launch(new LaunchOptions
+                    {
+                        Version = ver, //Ver为Versions里你要启动的版本名字
+                        MaxMemory = Convert.ToInt32(MemoryTextbox.Text), //最大内存，int类型
+                        
+                        Mode = LaunchMode.MCLauncher,
 
+                    });
+                    // 错误提示
+                    if (!result.Success)
+                    {
+                        switch (result.ErrorType)
+                        {
+                            case ErrorType.NoJAVA:
+                                MessageBox.Show("Java错误！详细信息：" + result.ErrorMessage, "错误！");
+                                break;
+                            case ErrorType.AuthenticationFailed:
+                                MessageBox.Show("登录时发生错误！详细信息：" + result.ErrorMessage, "错误！");
+                                break;
+                            case ErrorType.UncompressingFailed:
+                                MessageBox.Show("文件错误！详细信息：" + result.ErrorMessage, "错误！");
+                                break;
+                            default:
+                                MessageBox.Show(result.ErrorMessage, "错误！");
+                                break;
+                        }
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("启动失败！", "错误！");
+                }
+            }
+            else
+            {
+                MessageBox.Show("信息不完整！", "错误！");
+            }
         }
         //统一通行证
         // 服务器ID
@@ -222,79 +226,98 @@ namespace AuroraMinecarftLauncher
 
         }
         // 启动
-        private void TStart(object sender, RoutedEventArgs e)
+        private async void TStart(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        // 下载页-版本列表
-        private async void DL_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string downloadUrl = $"https://bmclapi2.bangbang93.com/version/{version}/client"; // 版本下载API URL稍作调整
-            string downloadPath = System.IO.Path.Combine(".minecraft", $"{version}.jar");
-
-            using (var response = await _httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead))
+            var userInfo = await UnifiedPassAuthenticator.Authenticate(TName.Text, TPassword.Text, ServerID.Text);
+            if (IDTextbox.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
             {
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    var totalBytes = response.Content.Headers.ContentLength ?? 0L;
-                    var readBytes = 0L;
-                    var buffer = new byte[8192];
-                    var isMoreToRead = true;
-
-                    using (var fileStream = new System.IO.FileStream(downloadPath, System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None))
+                    Core.JavaPath = java.SelectedValue + "\\javaw.exe";
+                    var ver = (KMCCC.Launcher.Version)version.SelectedItem;
+                    var result = Core.Launch(new LaunchOptions
                     {
-                        using (var stream = await response.Content.ReadAsStreamAsync())
+                        Version = ver, //Ver为Versions里你要启动的版本名字
+                        MaxMemory = Convert.ToInt32(MemoryTextbox.Text), //最大内存，int类型
+                        
+                        Mode = LaunchMode.MCLauncher,
+
+                    });
+                    // 错误提示
+                    if (!result.Success)
+                    {
+                        switch (result.ErrorType)
                         {
-                            do
-                            {
-                                var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
-                                if (bytesRead == 0)
-                                {
-                                    isMoreToRead = false;
-                                    continue;
-                                }
-
-                                await fileStream.WriteAsync(buffer, 0, bytesRead);
-
-                                readBytes += bytesRead;
-                                jdt1(readBytes, totalBytes);
-                            }
-                            while (isMoreToRead);
-
-                            MessageBox.Show("下载完成！");
+                            case ErrorType.NoJAVA:
+                                MessageBox.Show("Java错误！详细信息：" + result.ErrorMessage, "错误！");
+                                break;
+                            case ErrorType.AuthenticationFailed:
+                                MessageBox.Show("登录时发生错误！详细信息：" + result.ErrorMessage, "错误！");
+                                break;
+                            case ErrorType.UncompressingFailed:
+                                MessageBox.Show("文件错误！详细信息：" + result.ErrorMessage, "错误！");
+                                break;
+                            default:
+                                MessageBox.Show(result.ErrorMessage, "错误！");
+                                break;
                         }
                     }
                 }
-                else
+                catch
                 {
-                    MessageBox.Show($"下载失败：{response.ReasonPhrase}");
+                    MessageBox.Show("启动失败！", "错误！");
                 }
             }
-        }
-        // 下载页-安装
-        private async void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            ZipFile.ExtractToDirectory(downloadPath, installPath, true);
-
-            // 进行额外的安装步骤
-            // 比如移动文件到正确的位置，编辑配置文件等
-
-            MessageBox.Show("安装完成！");
+            else
+            {
+                MessageBox.Show("信息不完整！", "错误！");
+            }
         }
 
-        // 下载页-刷新
-        private async void Button_Click_4(object sender, RoutedEventArgs e)
+       
+        private void jdt_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            try
-            {
-                DL.ItemsSource = await GetMinecraftVersions();
-                MessageBox.Show("版本列表已更新。");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"无法刷新版本列表: {ex.Message}");
-            }
+
+        }
+        // D-install
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+        // D-MC
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        // D-Forge
+        private void ComboBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        // D-OF
+        private void ComboBox_SelectionChanged_3(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        // D-Fadric
+        private void ComboBox_SelectionChanged_4(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        // D-OF of Fabric
+        private void ComboBox_SelectionChanged_5(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        // D-Fabric API
+        private void ComboBox_SelectionChanged_6(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
