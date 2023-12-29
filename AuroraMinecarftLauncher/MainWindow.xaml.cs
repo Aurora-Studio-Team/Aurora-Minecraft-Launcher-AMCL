@@ -16,7 +16,7 @@ namespace AuroraMinecarftLauncher
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public static LaunchConfig LaunchConfig { get; } = new LaunchConfig();
         public Account UserInfo {get; private set; }
