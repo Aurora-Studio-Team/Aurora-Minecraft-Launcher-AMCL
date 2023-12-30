@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BitmapImage x:Key="logo" UriSource="amclb.png"/>
+    <BitmapImage x:Key="Steve" UriSource="Steve.jpg"/>
+    <BitmapImage x:Key="AS" UriSource="AuroraStudio.png"/>
+</ResourceDictionary>

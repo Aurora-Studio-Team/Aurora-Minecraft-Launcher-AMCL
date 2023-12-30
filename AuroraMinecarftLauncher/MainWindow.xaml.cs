@@ -10,13 +10,15 @@ using StarLight_Core.Authentication;
 using MinecraftLaunch.Modules.Models.Launch;
 using MinecraftLaunch.Modules.Models.Auth;
 using System.Net.Http;
+using MinecraftOAuth.Authenticator;
+using Newtonsoft.Json.Linq;
 
 namespace AuroraMinecarftLauncher
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public static LaunchConfig LaunchConfig { get; } = new LaunchConfig();
         public Account UserInfo {get; private set; }
@@ -29,11 +31,13 @@ namespace AuroraMinecarftLauncher
         private string downloadPath = ".minecraft/versions/";
         private string installPath = ".minecraft/versions/";
 
-
         // 配置项
         public MainWindow()
         {
             InitializeComponent();
+
+            Url1.Navigate("https://afdian.net/a/thzstudent");
+            
 
             _httpClient = new HttpClient();
 
@@ -127,25 +131,41 @@ namespace AuroraMinecarftLauncher
         // 启动页-微软登录
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string clientId = "a0ceb477-0738-47fa-8c93-52d892aa866a";
-            var deviceCodeInfo = await MicrosoftAuthentication.RetrieveDeviceCodeInfo(clientId);
-            System.Diagnostics.Process.Start("explorer.exe", deviceCodeInfo.VerificationUri);
-            MessageBox.Show("在浏览器中输入您的验证代码：" + deviceCodeInfo.UserCode, "Microsoft登录");
-            var tokenInfo = await MicrosoftAuthentication.GetTokenResponse(deviceCodeInfo);
-            var userInfo = await MicrosoftAuthentication.MicrosoftAuthAsync(tokenInfo, x =>
+            MicrosoftAuthenticator authenticator = new(MinecraftOAuth.Module.Enum.AuthType.Access)
             {
-                Console.WriteLine(x);
-
+                ClientId = "a0ceb477-0738-47fa-8c93-52d892aa866a"
+            };
+            var deviceInfo = await authenticator.GetDeviceInfo();
+            Console.WriteLine(deviceInfo.UserCode);
+            var token = await authenticator.GetTokenResponse(deviceInfo);
+            MessageBox.Show("请在浏览器中输入您的用户验证代码：" + deviceInfo.UserCode);
+            var userProfile = await authenticator.AuthAsync((a) =>
+            {
+                Console.WriteLine(a);
             });
-            MessageBox.Show("欢迎回来！" + userInfo.Name, "欢迎");
-            userName.Text = userInfo.Name;
-            // userImge.Source = new BitmapImage(new Uri("@https://crafatar.com/avatars/"+userInfo.Name));
+            userProfile.RefreshToken = token.RefreshToken;
+            MessageBox.Show("欢迎回来！" + UserInfo.Name, "欢迎");
+            userName.Text = UserInfo.Name;
         }
-
         // 启动页-正版启动
         private void ZB_Start(object sender, RoutedEventArgs e)
         {
-            
+            LaunchConfig config = new LaunchConfig
+            {
+                Account = UserInfo.AccessToken, //账户信息的获取请使用验证器，使用方法请跳转至验证器文档查看
+                GameWindowConfig = new GameWindowConfig
+                {
+                    Width = 600,
+                    Height = 800,
+                    IsFullscreen = false
+                },
+                JvmConfig = new JvmConfig(java.SelectedValue + "\\javaw.exe")
+                {
+                    MaxMemory = int.Parse(MemoryTextbox.Text),
+                    MinMemory = 0
+                },
+                IsEnableIndependencyCore = true//是否启用版本隔离
+            };
         }
 
         private void IDT(object sender, TextChangedEventArgs e)
@@ -228,7 +248,7 @@ namespace AuroraMinecarftLauncher
         // 启动
         private async void TStart(object sender, RoutedEventArgs e)
         {
-            var userInfo = await UnifiedPassAuthenticator.Authenticate(TName.Text, TPassword.Text, ServerID.Text);
+            var userInfo = await StarLight_Core.Authentication.UnifiedPassAuthenticator.Authenticate(TName.Text, TPassword.Text, ServerID.Text);
             if (IDTextbox.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
             {
                 try
@@ -318,6 +338,34 @@ namespace AuroraMinecarftLauncher
         public void Dispose()
         {
             throw new NotImplementedException();
+        }
+
+        private void WebBrowser_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
+        {
+
+        }
+        
+        // 设置
+        // 关于
+        // ULA
+        private void ULA_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://amcl.thzstudent.top/doc/ula.html");
+        }
+        // GitHub
+        private void GitHub_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://github.com/Aurora-Studio-Team/Aurora-Minecarft-Launcher-AMCL");
+        }
+        // Gitee
+        private void Gitee_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://gitee.com/THZtx/Aurora-Minecarft-Launcher-AMCL");
+        }
+        // GW
+        private void GW_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://amcl.thzstudent.top");
         }
     }
 }

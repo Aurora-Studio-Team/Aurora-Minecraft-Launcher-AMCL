@@ -9,7 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\amclb.png" />
+    <None Remove="Images\AuroraStudio.png" />
+    <None Remove="Images\Steve.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="I-AMCL.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\AuroraStudio.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,10 +28,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="HandyControl" Version="3.4.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="MinecraftLaunch" Version="2.0.1" />
     <PackageReference Include="MinecraftOAuth" Version="2.0.1" />
     <PackageReference Include="OneMinecraftLauncher.Core" Version="1.1.6" />
     <PackageReference Include="StarLight_Core" Version="1.0.0-Alpha6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\amclb.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Steve.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
