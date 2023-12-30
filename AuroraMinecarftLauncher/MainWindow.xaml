@@ -6,10 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         mc:Ignorable="d"
         xmlns:iconPacks = "http://metro.mahapps.com/winfx/xaml/iconpacks"
-        Title="Aurora Minecraft Launcher" Height="500" Width="820">
+        Title="Aurora Minecraft Launcher" Height="500" Width="850">
     <hc:Window.NonClientAreaContent>
         <StackPanel Orientation="Horizontal" Height="45">
-
         </StackPanel>
     </hc:Window.NonClientAreaContent>
     <Grid Margin="0,0,-3,2" Background="White">
@@ -81,6 +80,12 @@
                             </TabControl>
                         </TabItem>
                     </TabControl>
+                    <hc:Card Margin="10,61,301,234">
+                        <Grid Margin="2,0,-2,0">
+                            <WebBrowser HorizontalAlignment="Left" Height="140" Margin="7,0,0,0" VerticalAlignment="Center" Width="350" x:Name="Url2"/>
+                        </Grid>
+                    </hc:Card>
+                    <TextBlock HorizontalAlignment="Left" Height="25" Margin="15,31,0,0" TextWrapping="Wrap" Text="公告" VerticalAlignment="Top" Width="65" FontSize="20"/>
                 </Grid>
             </TabItem>
             <TabItem Header="下载" Width="150" Margin="-1,13,1,-20">
@@ -110,17 +115,22 @@
                     <iconPacks:PackIconIonicons Kind="SettingsMD" Margin="30,27,0,0" Height="50" Width="40" RenderTransformOrigin="1,0.395" />
                     <TextBlock HorizontalAlignment="Left" Height="47" Margin="80,30,0,0" TextWrapping="Wrap" Text="设置" VerticalAlignment="Top" Width="79" FontSize="35"/>
                     <TabControl HorizontalAlignment="Left" Height="612" Margin="39,75,0,0" VerticalAlignment="Top" Width="600">
+                        <TabItem Header="游戏设置">
+                            <Grid>
+                                <Label Content="选择Java" Height="29" Margin="13,42,0,0" VerticalAlignment="Top" Width="93" HorizontalAlignment="Left"/>
+                                <Label Content="设置最大内存(单位：MB)" HorizontalAlignment="Left" Height="29" Margin="8,7,0,0" VerticalAlignment="Top" Width="168"/>
+                                <ComboBox HorizontalAlignment="Left" Height="28" Margin="119,41,0,0" VerticalAlignment="Top" Width="457" x:Name="java" SelectionChanged="javaCombo_SelectionChanged"/>
+                                <TextBox HorizontalAlignment="Left" Height="25" Margin="186,6,0,0" TextWrapping="Wrap" Text="1024" VerticalAlignment="Top" Width="169" x:Name="MemoryTextbox" TextChanged="MemoryTextbox_TextChanged"/>
+                            </Grid>
+                        </TabItem>
                         <TabItem Header="启动器设置">
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="63*"/>
-                                    <ColumnDefinition Width="25*"/>
-                                    <ColumnDefinition Width="212*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Content="选择Java" HorizontalAlignment="Left" Height="29" Margin="20,45,0,0" VerticalAlignment="Top" Width="93"/>
-                                <Label Content="设置最大内存(单位：MB)" HorizontalAlignment="Left" Height="29" Margin="12,8,0,0" VerticalAlignment="Top" Width="168" Grid.ColumnSpan="3"/>
-                                <ComboBox HorizontalAlignment="Left" Height="28" Margin="125,45,0,0" VerticalAlignment="Top" Width="457" x:Name="java" SelectionChanged="javaCombo_SelectionChanged" Grid.ColumnSpan="3"/>
-                                <TextBox HorizontalAlignment="Left" Height="25" Margin="12,7,0,0" TextWrapping="Wrap" Text="1024" VerticalAlignment="Top" Width="169" x:Name="MemoryTextbox" TextChanged="MemoryTextbox_TextChanged" Grid.Column="2"/>
+                                <Label Content="Minecarft版本列表获取：" HorizontalAlignment="Left" Margin="20,11,0,0" VerticalAlignment="Top"/>
+                                <ComboBox HorizontalAlignment="Left" Height="30" Margin="196,11,0,0" VerticalAlignment="Top" Width="190"/>
+                                <Label Content="整合包命名规则：" HorizontalAlignment="Left" Margin="31,51,0,0" VerticalAlignment="Top"/>
+                                <ComboBox Height="30" Margin="156,51,24,500"/>
+                                <Label Content="优先模组、整合包源：" HorizontalAlignment="Left" Margin="29,91,0,0" VerticalAlignment="Top"/>
+                                <ComboBox Height="30" Margin="186,91,249,460"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="关于">

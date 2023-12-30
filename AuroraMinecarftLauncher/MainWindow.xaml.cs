@@ -37,7 +37,7 @@ namespace AuroraMinecarftLauncher
             InitializeComponent();
 
             Url1.Navigate("https://afdian.net/a/thzstudent");
-            
+            Url2.Navigate("https://amcl.thzstudent.top/api/g/");
 
             _httpClient = new HttpClient();
 
