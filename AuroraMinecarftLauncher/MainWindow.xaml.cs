@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -318,10 +319,7 @@ namespace AuroraMinecarftLauncher
             await Task.Run(async () =>
             {
                 GameCoreInstaller list = new(new(".minecraft"), id);
-                var res = await list.InstallAsync(async x =>
-                {
-                    Debug.WriteLine(x.Item2);
-                });
+                var res = await list.InstallAsync();
 
                 if (res.Success)
                 {
