@@ -90,24 +90,23 @@
             </TabItem>
             <TabItem Header="下载" Width="150" Margin="-1,13,1,-20">
                 <Grid Width="655" Margin="0,-11,0,3">
-                    <iconPacks:PackIconJamIcons Kind="Download" Margin="20,35,0,0" Height="30" Width="45" />
-                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="170,164,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged_1"/>
-                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="357,164,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged_2"/>
-                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="360,230,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged_4"/>
-                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="170,231,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged_3"/>
-                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="356,298,0,0" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.476,0.718" SelectionChanged="ComboBox_SelectionChanged_6"/>
-                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="175,298,0,0" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.509,0.67" SelectionChanged="ComboBox_SelectionChanged_5"/>
-                    <Label Content="Minecraft" HorizontalAlignment="Left" Height="27" Margin="170,133,0,0" VerticalAlignment="Top" Width="115"/>
-                    <Label Content="Forge" HorizontalAlignment="Left" Height="29" Margin="355,132,0,0" VerticalAlignment="Top" Width="115"/>
-                    <Label Content="OptiFine" HorizontalAlignment="Left" Height="31" Margin="172,197,0,0" VerticalAlignment="Top" Width="115"/>
-                    <Label Content="Fabric" HorizontalAlignment="Left" Height="30" Margin="357,198,0,0" VerticalAlignment="Top" Width="115"/>
-                    <Label Content="Fabric API" HorizontalAlignment="Left" Height="27" Margin="359,266,0,0" VerticalAlignment="Top" Width="115"/>
-                    <Label Content="OptiFabric" HorizontalAlignment="Left" Height="29" Margin="173,265,0,0" VerticalAlignment="Top" Width="115"/>
-                    <Button Content="安装" HorizontalAlignment="Left" Height="45" Margin="455,359,0,0" VerticalAlignment="Top" Width="115" Click="Button_Click_2" FontSize="20" Background="BlueViolet"/>
-                    <TextBlock HorizontalAlignment="Left" Height="159" Margin="17,152,0,0" TextWrapping="Wrap" Text="如果您需要安装 &#13; Fabric，请同时选择 &#13; Fabric API &#13; 如要同时安装 OptiFine，请选择上 OptiFabric。" VerticalAlignment="Top" Width="131"/>
-                    <TextBox HorizontalAlignment="Left" Height="31" Margin="162,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="379" x:Name="vName"/>
-                    <Label Content="版本名称：" HorizontalAlignment="Left" Height="32" Margin="59,97,0,0" VerticalAlignment="Top" Width="99"/>
-                    <TextBlock HorizontalAlignment="Left" Height="47" Margin="60,25,0,0" TextWrapping="Wrap" Text="下载" VerticalAlignment="Top" Width="88" FontSize="35"/>
+                    <ListBox x:Name="DownloadList" Margin="25,15,55,99" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Id}" FontWeight="Bold" FontSize="14"/>
+                                        <TextBlock>
+                               <Run Text="发布时间："/>
+                               <Run Text="{Binding ReleaseTime}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Content="安装" HorizontalAlignment="Left" Height="45" Margin="465,360,0,0" VerticalAlignment="Top" Width="115" Click="Button_Click_2" FontSize="20" Background="BlueViolet"/>
+                    <Button Content="刷新" Height="45" HorizontalAlignment="Left" Margin="399,360,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click_3"/>
                 </Grid>
             </TabItem>
             <TabItem Header="设置" Width="150" Margin="-1,21,1,-29">

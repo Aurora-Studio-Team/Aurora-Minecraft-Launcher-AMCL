@@ -12,6 +12,9 @@ using MinecraftLaunch.Modules.Models.Auth;
 using System.Net.Http;
 using MinecraftOAuth.Authenticator;
 using Newtonsoft.Json.Linq;
+using MinecraftLaunch.Modules.Models.Install;
+using System.Threading.Tasks;
+using MinecraftLaunch.Modules.Installer;
 
 namespace AuroraMinecarftLauncher
 {
@@ -295,45 +298,38 @@ namespace AuroraMinecarftLauncher
         }
 
        
-        private void jdt_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void Button_Click_3(object sender, RoutedEventArgs e)
         {
-
+            await Task.Run(async () =>
+            {
+                GameCoreInstaller list = new(new(".minecraft"), "1.12.2");
+                var res = (await list.GetGameCoresAsync()).Cores;
+                res.ToList().ForEach(x =>
+                {
+                    if (x.Type is "release")
+                        this.Dispatcher.BeginInvoke(() => { DownloadList.Items.Add(x); });
+                });
+            });
         }
         // D-install
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            var id = (DownloadList.SelectedItem as GameCoreEmtity)!.Id;
+            await Task.Run(async () =>
+            {
+                GameCoreInstaller list = new(new(".minecraft"), id);
+                var res = await list.InstallAsync(async x =>
+                {
+                    Debug.WriteLine(x.Item2);
+                });
 
+                if (res.Success)
+                {
+                    MessageBox.Show("安装成功");
+                }
+            });
         }
-        // D-MC
-        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        // D-Forge
-        private void ComboBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        // D-OF
-        private void ComboBox_SelectionChanged_3(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        // D-Fadric
-        private void ComboBox_SelectionChanged_4(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        // D-OF of Fabric
-        private void ComboBox_SelectionChanged_5(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        // D-Fabric API
-        private void ComboBox_SelectionChanged_6(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        
 
         public void Dispose()
         {
@@ -367,5 +363,6 @@ namespace AuroraMinecarftLauncher
         {
             System.Diagnostics.Process.Start("explorer.exe", "https://amcl.thzstudent.top");
         }
+
     }
 }
