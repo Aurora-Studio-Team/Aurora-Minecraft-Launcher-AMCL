@@ -304,9 +304,12 @@ namespace AuroraMinecarftLauncher
             await Task.Run(async () =>
             {
                 GameCoresEntity gameCores = await GameCoreInstaller.GetGameCoresAsync();
-
+                
                 var releaseVersions = gameCores.Cores.Where(v => v.Type == "release").Select(v => v.Id);
-                DownloadList.ItemsSource = releaseVersions;
+                Dispatcher.BeginInvoke(() =>
+                {
+                    DownloadList.ItemsSource = releaseVersions;
+                });
             });
         }
         // D-install
