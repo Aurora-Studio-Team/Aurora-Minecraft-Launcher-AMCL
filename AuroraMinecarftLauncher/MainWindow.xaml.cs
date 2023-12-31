@@ -303,12 +303,12 @@ namespace AuroraMinecarftLauncher
             await Task.Run(async () =>
             {
                 GameCoreInstaller list = new(new(".minecraft"), "1.12.2");
-                var res = (await list.GetGameCoresAsync()).Cores;
-                res.ToList().ForEach(x =>
-                {
-                    if (x.Type is "release")
-                        this.Dispatcher.BeginInvoke(() => { DownloadList.Items.Add(x); });
-                });
+                // var res = (await list.GetGameCoresAsync()).Cores;
+                // res.ToList().ForEach(x =>
+                // {
+                   //  if (x.Type is "release")
+                       //  this.Dispatcher.BeginInvoke(() => { DownloadList.Items.Add(x); });
+                // });
             });
         }
         // D-install
@@ -317,16 +317,16 @@ namespace AuroraMinecarftLauncher
             var id = (DownloadList.SelectedItem as GameCoreEmtity)!.Id;
             await Task.Run(async () =>
             {
-                GameCoreInstaller list = new(new(".minecraft"), id);
-                var res = await list.InstallAsync(async x =>
-                {
-                    Debug.WriteLine(x.Item2);
-                });
+                // GameCoreInstaller list = new(new(".minecraft"), id);
+                // var res = await list.InstallAsync(async x =>
+                // {
+                    // Debug.WriteLine(x.Item2);
+                // });
 
-                if (res.Success)
-                {
-                    MessageBox.Show("安装成功");
-                }
+                // if (res.Success)
+                // {
+                   // MessageBox.Show("安装成功");
+                // }
             });
         }
         

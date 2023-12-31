@@ -6,18 +6,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         mc:Ignorable="d"
         xmlns:iconPacks = "http://metro.mahapps.com/winfx/xaml/iconpacks"
+        ResizeMode="CanMinimize"
         Title="Aurora Minecraft Launcher" Height="500" Width="850">
     <hc:Window.NonClientAreaContent>
         <StackPanel Orientation="Horizontal" Height="45">
         </StackPanel>
     </hc:Window.NonClientAreaContent>
-    <Grid Margin="0,0,-3,2" Background="White">
+    <Grid Height="500" Width="850" Margin="0,0,-3,2" Background="White">
         <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Height="436" Margin="-6,1,0,0" VerticalAlignment="Top" Width="790" RenderTransformOrigin="0.432,0.488">
             <TabItem Header="启动" Width="150" Margin="0,0,0,-11">
-                <Grid Margin="0,-12,0,3" Width="681">
-                    <ComboBox HorizontalAlignment="Left" Height="30" Margin="445,381,0,0" VerticalAlignment="Top" Width="160" x:Name="version" DisplayMemberPath="Id" SelectionChanged="ComboBox_SelectionChanged" RenderTransformOrigin="0.506,0.575"/>
-                    <Label Content="选择版本" HorizontalAlignment="Left" Height="30" Margin="447,346,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="0.115,0.899"/>
-                    <TabControl HorizontalAlignment="Left" Height="313" Margin="395,23,0,0" VerticalAlignment="Top" Width="268">
+                <Grid Margin="0,-12,0,3" Width="706">
+                    <ComboBox HorizontalAlignment="Left" Height="30" Margin="428,381,0,0" VerticalAlignment="Top" Width="160" x:Name="version" DisplayMemberPath="Id" SelectionChanged="ComboBox_SelectionChanged" RenderTransformOrigin="0.506,0.575"/>
+                    <Label Content="选择版本" HorizontalAlignment="Left" Height="30" Margin="434,346,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="0.115,0.899"/>
+                    <TabControl HorizontalAlignment="Left" Height="313" Margin="374,23,0,0" VerticalAlignment="Top" Width="282">
                         <TabItem Header="微软登录" Margin="22,0,-22,0">
                             <Grid Margin="0,0,13,0">
                                 <Grid.ColumnDefinitions>
@@ -80,17 +81,17 @@
                             </TabControl>
                         </TabItem>
                     </TabControl>
-                    <hc:Card Margin="10,61,301,234">
-                        <Grid Margin="2,0,-2,0">
-                            <WebBrowser HorizontalAlignment="Left" Height="140" Margin="7,0,0,0" VerticalAlignment="Center" Width="350" x:Name="Url2"/>
+                    <hc:Card Margin="14,61,342,234" Width="350">
+                        <Grid Margin="2,0,-2,0" Width="350">
+                            <WebBrowser HorizontalAlignment="Center" Height="140" VerticalAlignment="Center" Width="335" x:Name="Url2"/>
                         </Grid>
                     </hc:Card>
                     <TextBlock HorizontalAlignment="Left" Height="25" Margin="15,31,0,0" TextWrapping="Wrap" Text="公告" VerticalAlignment="Top" Width="65" FontSize="20"/>
                 </Grid>
             </TabItem>
             <TabItem Header="下载" Width="150" Margin="-1,13,1,-20">
-                <Grid Width="655" Margin="0,-11,0,3">
-                    <ListBox x:Name="DownloadList" Margin="25,15,55,99" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <Grid Width="712" Margin="0,-11,0,3">
+                    <ListBox x:Name="DownloadList" Margin="30,125,87,99" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
