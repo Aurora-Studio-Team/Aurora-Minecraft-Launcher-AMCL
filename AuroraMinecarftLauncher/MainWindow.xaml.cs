@@ -303,13 +303,10 @@ namespace AuroraMinecarftLauncher
         {
             await Task.Run(async () =>
             {
-                GameCoreInstaller list = new(new(".minecraft"), "1.12.2");
-                var res = (await list.GetGameCoresAsync()).Cores;
-                res.ToList().ForEach(x =>
-                {
-                    if (x.Type is "release")
-                        this.Dispatcher.BeginInvoke(() => { DownloadList.Items.Add(x); });
-                });
+                GameCoresEntity gameCores = await GameCoreInstaller.GetGameCoresAsync();
+
+                var releaseVersions = gameCores.Cores.Where(v => v.Type == "release").Select(v => v.Id);
+                DownloadList.ItemsSource = releaseVersions;
             });
         }
         // D-install
