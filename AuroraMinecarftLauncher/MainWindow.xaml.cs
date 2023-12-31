@@ -11,11 +11,11 @@ using StarLight_Core.Authentication;
 using MinecraftLaunch.Modules.Models.Launch;
 using MinecraftLaunch.Modules.Models.Auth;
 using System.Net.Http;
-using MinecraftOAuth.Authenticator;
 using Newtonsoft.Json.Linq;
 using MinecraftLaunch.Modules.Models.Install;
 using System.Threading.Tasks;
 using MinecraftLaunch.Modules.Installer;
+using System.Windows.Input;
 
 namespace AuroraMinecarftLauncher
 {
@@ -62,6 +62,31 @@ namespace AuroraMinecarftLauncher
             // 初始选择
             version.SelectedItem = 1;
             java.SelectedItem = 1;
+        }
+
+        // Title
+        private void TitleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            zxh.Click += (s, e) =>
+            {
+                WindowState = WindowState.Minimized;
+            };
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            gb.Click += (s, e) =>
+            {
+                Close();
+            };
         }
 
         private void javaCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -135,21 +160,16 @@ namespace AuroraMinecarftLauncher
         // 启动页-微软登录
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            MicrosoftAuthenticator authenticator = new(MinecraftOAuth.Module.Enum.AuthType.Access)
+            var deviceCodeInfo = await MicrosoftAuthentication.RetrieveDeviceCodeInfo("a0ceb477-0738-47fa-8c93-52d892aa866a");
+            Process.Start("explorer.exe", deviceCodeInfo.VerificationUri);
+            MessageBox.Show("请在浏览器中输入您的用户验证代码：" + deviceCodeInfo.UserCode,"Microsoft验证");
+            var tokenInfo = await MicrosoftAuthentication.GetTokenResponse(deviceCodeInfo);
+            var userInfo = await MicrosoftAuthentication.MicrosoftAuthAsync(tokenInfo, x =>
             {
-                ClientId = "a0ceb477-0738-47fa-8c93-52d892aa866a"
-            };
-            var deviceInfo = await authenticator.GetDeviceInfo();
-            Console.WriteLine(deviceInfo.UserCode);
-            var token = await authenticator.GetTokenResponse(deviceInfo);
-            MessageBox.Show("请在浏览器中输入您的用户验证代码：" + deviceInfo.UserCode);
-            var userProfile = await authenticator.AuthAsync((a) =>
-            {
-                Console.WriteLine(a);
+                Console.WriteLine(x);
             });
-            userProfile.RefreshToken = token.RefreshToken;
-            MessageBox.Show("欢迎回来！" + UserInfo.Name, "欢迎");
-            userName.Text = UserInfo.Name;
+            MessageBox.Show("欢迎回来！" + userInfo.Name, "欢迎");
+            userName.Text = userInfo.Name;
         }
         // 启动页-正版启动
         private void ZB_Start(object sender, RoutedEventArgs e)
@@ -189,49 +209,7 @@ namespace AuroraMinecarftLauncher
         // LittleSkin-Start
         private void LStart(object sender, RoutedEventArgs e)
         {
-            if (IDTextbox.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
-            {
-                try
-                {
-                    Core.JavaPath = java.SelectedValue + "\\javaw.exe";
-                    var ver = (KMCCC.Launcher.Version)version.SelectedItem;
-                    var result = Core.Launch(new LaunchOptions
-                    {
-                        Version = ver, //Ver为Versions里你要启动的版本名字
-                        MaxMemory = Convert.ToInt32(MemoryTextbox.Text), //最大内存，int类型
-                        
-                        Mode = LaunchMode.MCLauncher,
-
-                    });
-                    // 错误提示
-                    if (!result.Success)
-                    {
-                        switch (result.ErrorType)
-                        {
-                            case ErrorType.NoJAVA:
-                                MessageBox.Show("Java错误！详细信息：" + result.ErrorMessage, "错误！");
-                                break;
-                            case ErrorType.AuthenticationFailed:
-                                MessageBox.Show("登录时发生错误！详细信息：" + result.ErrorMessage, "错误！");
-                                break;
-                            case ErrorType.UncompressingFailed:
-                                MessageBox.Show("文件错误！详细信息：" + result.ErrorMessage, "错误！");
-                                break;
-                            default:
-                                MessageBox.Show(result.ErrorMessage, "错误！");
-                                break;
-                        }
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("启动失败！", "错误！");
-                }
-            }
-            else
-            {
-                MessageBox.Show("信息不完整！", "错误！");
-            }
+            
         }
         //统一通行证
         // 服务器ID
@@ -253,49 +231,7 @@ namespace AuroraMinecarftLauncher
         private async void TStart(object sender, RoutedEventArgs e)
         {
             var userInfo = await StarLight_Core.Authentication.UnifiedPassAuthenticator.Authenticate(TName.Text, TPassword.Text, ServerID.Text);
-            if (IDTextbox.Text != string.Empty && java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
-            {
-                try
-                {
-                    Core.JavaPath = java.SelectedValue + "\\javaw.exe";
-                    var ver = (KMCCC.Launcher.Version)version.SelectedItem;
-                    var result = Core.Launch(new LaunchOptions
-                    {
-                        Version = ver, //Ver为Versions里你要启动的版本名字
-                        MaxMemory = Convert.ToInt32(MemoryTextbox.Text), //最大内存，int类型
-                        
-                        Mode = LaunchMode.MCLauncher,
-
-                    });
-                    // 错误提示
-                    if (!result.Success)
-                    {
-                        switch (result.ErrorType)
-                        {
-                            case ErrorType.NoJAVA:
-                                MessageBox.Show("Java错误！详细信息：" + result.ErrorMessage, "错误！");
-                                break;
-                            case ErrorType.AuthenticationFailed:
-                                MessageBox.Show("登录时发生错误！详细信息：" + result.ErrorMessage, "错误！");
-                                break;
-                            case ErrorType.UncompressingFailed:
-                                MessageBox.Show("文件错误！详细信息：" + result.ErrorMessage, "错误！");
-                                break;
-                            default:
-                                MessageBox.Show(result.ErrorMessage, "错误！");
-                                break;
-                        }
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("启动失败！", "错误！");
-                }
-            }
-            else
-            {
-                MessageBox.Show("信息不完整！", "错误！");
-            }
+            
         }
 
        
@@ -306,7 +242,10 @@ namespace AuroraMinecarftLauncher
                 GameCoresEntity gameCores = await GameCoreInstaller.GetGameCoresAsync();
 
                 var releaseVersions = gameCores.Cores.Where(v => v.Type == "release").Select(v => v.Id);
-                DownloadList.ItemsSource = releaseVersions;
+                _ = Dispatcher.BeginInvoke(() =>
+                {
+                    DownloadList.ItemsSource = releaseVersions;
+                });
             });
         }
         // D-install
@@ -318,10 +257,10 @@ namespace AuroraMinecarftLauncher
                 GameCoreInstaller list = new(new(".minecraft"), id);
                 var res = await list.InstallAsync();
 
-                // if (res.Success)
-                // {
-                   // MessageBox.Show("安装成功");
-                // }
+                if (res.Success)
+                {
+                   MessageBox.Show("安装成功");
+                }
             });
         }
         
@@ -358,6 +297,5 @@ namespace AuroraMinecarftLauncher
         {
             System.Diagnostics.Process.Start("explorer.exe", "https://amcl.thzstudent.top");
         }
-
     }
 }

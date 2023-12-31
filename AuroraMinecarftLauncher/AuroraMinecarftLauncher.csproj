@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\amcl.ico" />
+    <None Remove="Images\amcl.png" />
     <None Remove="Images\amclb.png" />
     <None Remove="Images\AuroraStudio.png" />
     <None Remove="Images\Steve.jpg" />
@@ -19,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\amcl.png" />
     <Resource Include="Images\AuroraStudio.png" />
   </ItemGroup>
 
