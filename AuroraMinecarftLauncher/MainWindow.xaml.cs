@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -302,13 +303,10 @@ namespace AuroraMinecarftLauncher
         {
             await Task.Run(async () =>
             {
-                GameCoreInstaller list = new(new(".minecraft"), "1.12.2");
-                // var res = (await list.GetGameCoresAsync()).Cores;
-                // res.ToList().ForEach(x =>
-                // {
-                   //  if (x.Type is "release")
-                       //  this.Dispatcher.BeginInvoke(() => { DownloadList.Items.Add(x); });
-                // });
+                GameCoresEntity gameCores = await GameCoreInstaller.GetGameCoresAsync();
+
+                var releaseVersions = gameCores.Cores.Where(v => v.Type == "release").Select(v => v.Id);
+                DownloadList.ItemsSource = releaseVersions;
             });
         }
         // D-install
@@ -317,11 +315,8 @@ namespace AuroraMinecarftLauncher
             var id = (DownloadList.SelectedItem as GameCoreEmtity)!.Id;
             await Task.Run(async () =>
             {
-                // GameCoreInstaller list = new(new(".minecraft"), id);
-                // var res = await list.InstallAsync(async x =>
-                // {
-                    // Debug.WriteLine(x.Item2);
-                // });
+                GameCoreInstaller list = new(new(".minecraft"), id);
+                var res = await list.InstallAsync();
 
                 // if (res.Success)
                 // {
