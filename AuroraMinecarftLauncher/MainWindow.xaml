@@ -12,13 +12,13 @@
         Background="Transparent"
         Title="Aurora Minecraft Launcher" Height="500" Width="850">
 
-    <Grid Height="530" Width="850" Margin="0,0,-3,2" Background="White">
-        <StackPanel x:Name="TitleBar" MouseMove="TitleBar_MouseMove">
+    <Grid Margin="0,0,-3,2" Background="White">
+        <StackPanel Background="White" x:Name="TitleBar" MouseMove="TitleBar_MouseMove">
             <StackPanel.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.8"/>
             </StackPanel.Effect>
             <!--标题栏-->
-            <Grid Background="BlueViolet" Height="50" >
+            <Grid Background="White" Height="50" >
                 <Image Height="35" Margin="14,8,792,7" Source="{StaticResource icon}"/>
                 <TextBlock Height="20" Text="Aurora Minecarft Launcher" FontSize="18" Margin="80,13,502,17"/>
                 <StackPanel Margin="0,0,10,0" HorizontalAlignment="Right" Orientation="Horizontal">
@@ -44,9 +44,9 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Height="436" Margin="18,55,0,0" VerticalAlignment="Top" Width="790" RenderTransformOrigin="0.432,0.488">
-            <TabItem Header="启动" Width="150" Margin="0,0,0,-11">
-                <Grid Margin="0,0,0,-4" Width="660">
+        <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Height="445" Margin="0,55,0,0" VerticalAlignment="Top" Width="850" RenderTransformOrigin="0.432,0.488">
+            <TabItem Header="启动" Height="20" Width="150" Margin="-1,0,0,-11">
+                <Grid Margin="0,0,0,-4" Width="700">
                     <ComboBox HorizontalAlignment="Left" Height="30" Margin="428,381,0,0" VerticalAlignment="Top" Width="160" x:Name="version" DisplayMemberPath="Id" SelectionChanged="ComboBox_SelectionChanged" RenderTransformOrigin="0.506,0.575"/>
                     <Label Content="选择版本" HorizontalAlignment="Left" Height="30" Margin="434,346,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="0.115,0.899"/>
                     <TabControl HorizontalAlignment="Left" Height="313" Margin="374,23,0,0" VerticalAlignment="Top" Width="282">
@@ -112,15 +112,15 @@
                             </TabControl>
                         </TabItem>
                     </TabControl>
-                    <hc:Card Margin="14,61,342,234" Width="350">
-                        <Grid Margin="2,0,-2,0" Width="350">
-                            <WebBrowser HorizontalAlignment="Center" Height="140" VerticalAlignment="Center" Width="335" x:Name="Url2"/>
+                    <hc:Card Margin="0,61,342,234" Width="300">
+                        <Grid Margin="2,0,-2,0">
+                            <WebBrowser HorizontalAlignment="Center" Height="140" VerticalAlignment="Center" Width="290" x:Name="Url2"/>
                         </Grid>
                     </hc:Card>
                     <TextBlock HorizontalAlignment="Left" Height="25" Margin="15,31,0,0" TextWrapping="Wrap" Text="公告" VerticalAlignment="Top" Width="65" FontSize="20"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="下载" Width="150" Margin="-1,13,1,-20">
+            <TabItem Header="下载" Height="20" Width="150" Margin="-1,10,0,-10">
                 <Grid Width="712" Margin="0,-11,0,3">
                     <ListBox x:Name="DownloadList" Margin="30,125,87,99" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListBox.ItemTemplate>
@@ -141,7 +141,14 @@
                     <Button Content="刷新" Height="45" HorizontalAlignment="Left" Margin="399,360,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click_3"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="设置" Width="150" Margin="-1,21,1,-29">
+            <TabItem Header="联机" Height="20" Width="150" Margin="-1,15,5,-15">
+                <Grid>
+                    <iconPacks:PackIconFontisto Kind="BrokenLink" Height="35" Width="35" Margin="30,25,0,0" />
+                    <TextBlock Text="联机" FontSize="35" Margin="71,20,488,371"/>
+                    <TextBlock Text="此内容开发中！" FontSize="100" Height="150"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="设置" Height="20" Width="150" Margin="-1,20,-2,-20">
                 <Grid Margin="0,-8,0,8" RenderTransformOrigin="0.622,0.415">
                     <iconPacks:PackIconIonicons Kind="SettingsMD" Margin="30,27,0,0" Height="50" Width="40" RenderTransformOrigin="1,0.395" />
                     <TextBlock HorizontalAlignment="Left" Height="47" Margin="80,30,0,0" TextWrapping="Wrap" Text="设置" VerticalAlignment="Top" Width="79" FontSize="35"/>
@@ -186,8 +193,9 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <iconPacks:PackIconVaadinIcons Kind="PowerOff" Height="25" Width="16" Margin="52,64,0,0" />
-        <iconPacks:PackIconJamIcons Kind="Download" Margin="52,110,0,0" />
-        <iconPacks:PackIconIonicons Kind="SettingsMD" Margin="52,147,0,0" RenderTransformOrigin="0.281,1.25" />
+        <iconPacks:PackIconVaadinIcons Kind="PowerOff" Height="25" Width="16" Margin="40,63,0,0" />
+        <iconPacks:PackIconJamIcons Kind="Download" Margin="40,103,0,0" />
+        <iconPacks:PackIconFontisto Kind="BrokenLink" Margin="40,137,0,0" />
+        <iconPacks:PackIconIonicons Kind="SettingsMD" Margin="40,173,0,0" RenderTransformOrigin="0.281,1.25" />
     </Grid>
 </hc:Window>

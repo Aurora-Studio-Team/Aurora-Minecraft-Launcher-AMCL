@@ -242,7 +242,11 @@ namespace AuroraMinecarftLauncher
                 GameCoresEntity gameCores = await GameCoreInstaller.GetGameCoresAsync();
                 
                 var releaseVersions = gameCores.Cores.Where(v => v.Type == "release").Select(v => v.Id);
-                DownloadList.ItemsSource = releaseVersions;
+                _ = Dispatcher.BeginInvoke(() =>
+                Dispatcher.BeginInvoke(() =>
+                {
+                    DownloadList.ItemsSource = releaseVersions;
+                }));
             });
         }
         // D-install
@@ -293,6 +297,11 @@ namespace AuroraMinecarftLauncher
         private void GW_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", "https://amcl.thzstudent.top");
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
