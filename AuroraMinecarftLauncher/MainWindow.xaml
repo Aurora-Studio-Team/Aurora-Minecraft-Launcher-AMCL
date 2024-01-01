@@ -122,6 +122,8 @@
             </TabItem>
             <TabItem Header="下载" Height="20" Width="150" Margin="-1,10,0,-10">
                 <Grid Width="712" Margin="0,-11,0,3">
+                    <iconPacks:PackIconJamIcons Kind="Download" Margin="39,36,0,0" Height="40" Width="40" />
+                    <TextBlock Text="下载" Margin="94,31,523,376" FontSize="35"/>
                     <ListBox x:Name="DownloadList" Margin="30,125,87,99" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -150,7 +152,7 @@
             </TabItem>
             <TabItem Header="设置" Height="20" Width="150" Margin="-1,20,-2,-20">
                 <Grid Margin="0,-8,0,8" RenderTransformOrigin="0.622,0.415">
-                    <iconPacks:PackIconIonicons Kind="SettingsMD" Margin="30,27,0,0" Height="50" Width="40" RenderTransformOrigin="1,0.395" />
+                    <iconPacks:PackIconIonicons Kind="SettingsMD" Margin="29,33,0,0" Height="40" Width="40" RenderTransformOrigin="1,0.395" />
                     <TextBlock HorizontalAlignment="Left" Height="47" Margin="80,30,0,0" TextWrapping="Wrap" Text="设置" VerticalAlignment="Top" Width="79" FontSize="35"/>
                     <TabControl HorizontalAlignment="Left" Height="612" Margin="39,75,0,0" VerticalAlignment="Top" Width="600">
                         <TabItem Header="游戏设置">
