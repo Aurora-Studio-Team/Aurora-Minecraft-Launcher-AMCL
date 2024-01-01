@@ -124,21 +124,10 @@
                 <Grid Width="712" Margin="0,-11,0,3">
                     <iconPacks:PackIconJamIcons Kind="Download" Margin="39,36,0,0" Height="40" Width="40" />
                     <TextBlock Text="下载" Margin="94,31,523,376" FontSize="35"/>
-                    <ListBox x:Name="DownloadList" Margin="30,125,87,99" d:ItemsSource="{d:SampleData ItemCount=5}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="{Binding Id}" FontWeight="Bold" FontSize="14"/>
-                                        <TextBlock>
-                               <Run Text="发布时间："/>
-                               <Run Text="{Binding ReleaseTime}"/>
-                                        </TextBlock>
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
+                    <ListBox x:Name="DownloadList" Margin="30,125,87,99">
+                        <!-- 这里可以手动添加项目，或者在代码中动态添加 -->
                     </ListBox>
+
                     <Button Content="安装" HorizontalAlignment="Left" Height="45" Margin="465,360,0,0" VerticalAlignment="Top" Width="115" Click="Button_Click_2" FontSize="20" Background="BlueViolet"/>
                     <Button Content="刷新" Height="45" HorizontalAlignment="Left" Margin="399,360,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click_3"/>
                 </Grid>
