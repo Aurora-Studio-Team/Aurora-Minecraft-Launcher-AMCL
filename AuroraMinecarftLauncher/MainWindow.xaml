@@ -126,6 +126,7 @@
                     <TextBlock Text="下载" Margin="94,31,523,376" FontSize="35"/>
                     <ListBox x:Name="DownloadList" Margin="30,125,87,99">
                         <!-- 这里可以手动添加项目，或者在代码中动态添加 -->
+                     
                     </ListBox>
 
                     <Button Content="安装" HorizontalAlignment="Left" Height="45" Margin="465,360,0,0" VerticalAlignment="Top" Width="115" Click="Button_Click_2" FontSize="20" Background="BlueViolet"/>

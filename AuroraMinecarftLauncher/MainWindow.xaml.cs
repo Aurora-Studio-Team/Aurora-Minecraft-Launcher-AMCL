@@ -160,11 +160,12 @@ namespace AuroraMinecarftLauncher
         // 启动页-微软登录
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var deviceCodeInfo = await MicrosoftAuthentication.RetrieveDeviceCodeInfo("a0ceb477-0738-47fa-8c93-52d892aa866a");
+            var auth = new MicrosoftAuthentication("a0ceb477-0738-47fa-8c93-52d892aa866a");
+            var deviceCodeInfo = await auth.RetrieveDeviceCodeInfo();
             Process.Start("explorer.exe", deviceCodeInfo.VerificationUri);
             MessageBox.Show("请在浏览器中输入您的用户验证代码：" + deviceCodeInfo.UserCode,"Microsoft验证");
-            var tokenInfo = await MicrosoftAuthentication.GetTokenResponse(deviceCodeInfo);
-            var userInfo = await MicrosoftAuthentication.MicrosoftAuthAsync(tokenInfo, x =>
+            var tokenInfo = await auth.GetTokenResponse(deviceCodeInfo);
+            var userInfo = await auth.MicrosoftAuthAsync(tokenInfo, x =>
             {
                 Console.WriteLine(x);
             });
@@ -230,43 +231,58 @@ namespace AuroraMinecarftLauncher
         // 启动
         private async void TStart(object sender, RoutedEventArgs e)
         {
-            var userInfo = await StarLight_Core.Authentication.UnifiedPassAuthenticator.Authenticate(TName.Text, TPassword.Text, ServerID.Text);
-            
+            var auth = new UnifiedPassAuthenticator(TName.Text, TPassword.Text, ServerID.Text);
+            var userInfo = await auth.UnifiedPassAuthAsync();
         }
 
-       
+
+
         private async void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            await Task.Run(async () =>
+            try
             {
-                GameCoresEntity gameCores = await GameCoreInstaller.GetGameCoresAsync();
-                var releaseVersions = gameCores.Cores.Where(v => v.Type == "release").Select(v => v.Id);
-
-                // 更新UI
-                Dispatcher.Invoke(() =>
+                await Task.Run(async () =>
                 {
-                    DownloadList.Items.Clear();
-                    foreach (var version in releaseVersions)
+                    GameCoresEntity gameCores = await GameCoreInstaller.GetGameCoresAsync();
+                    var releaseVersions = gameCores.Cores.Where(v => v.Type == "release").Select(v => v.Id);
+
+                    // 更新UI
+                    Dispatcher.Invoke(() =>
                     {
-                        DownloadList.Items.Add("版本：" + version); // 这里假设version包含发布时间
-                    }
+                        DownloadList.Items.Clear();
+                        foreach (var version in releaseVersions)
+                        {
+                            DownloadList.Items.Add("版本：" + version); // 这里假设version包含发布时间
+                        }
+                    });
                 });
-            });
+            }
+            catch
+            {
+                MessageBox.Show("无法获取版本，请检查网络连接！", "❎错误");
+            };
         }
         // D-install
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            var id = (DownloadList.SelectedItem as GameCoreEmtity)!.Id;
-            await Task.Run(async () =>
+            try
             {
-                GameCoreInstaller list = new(new(".minecraft"), id);
-                var res = await list.InstallAsync();
-
-                if (res.Success)
+                var id = DownloadList.SelectedItem.ToString();
+                await Task.Run(async () =>
                 {
-                   MessageBox.Show("安装成功");
-                }
-            });
+                    GameCoreInstaller list = new(new(".minecraft"), id);
+                    var res = await list.InstallAsync();
+
+                    if (res.Success)
+                    {
+                        MessageBox.Show("安装成功");
+                    }
+                });
+            }
+            catch
+            {
+                MessageBox.Show("安装时出现错误，请检查网络环境，稍后再试。");
+            };
         }
         
 
