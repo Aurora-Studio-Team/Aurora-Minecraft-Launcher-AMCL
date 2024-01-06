@@ -45,11 +45,7 @@
             </Grid>
         </StackPanel>
         <ListBox x:Name="dhl" Height="450" Width="150" Margin="0,55,703,3">
-            <Grid>
-                <Button Height="40" Width="145" Content="首页" FontSize="18">
-                    
-                </Button>
-            </Grid>
+            
         </ListBox>
     </Grid>
 </hc:Window>

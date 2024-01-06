@@ -1,4 +1,5 @@
 ﻿<Window x:Class="AuroraMinecarftLauncher.Pages.Download"
+        xmlns:iconPacks = "http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +8,13 @@
         mc:Ignorable="d"
         Title="Download" Height="450" Width="800">
     <Grid>
-        
+        <iconPacks:PackIconJamIcons Kind="Download" Margin="39,36,0,0" Height="40" Width="40" />
+        <TextBlock Text="下载" Margin="94,31,523,357" FontSize="35"/>
+        <ListBox x:Name="DownloadList" Margin="45,125,45,99">
+
+        </ListBox>
+
+        <Button Content="安装" HorizontalAlignment="Left" Height="45" Margin="650,355,0,0" VerticalAlignment="Top" Width="115" Click="Button_Click_2" FontSize="20" Background="BlueViolet"/>
+        <Button Content="刷新" Height="45" HorizontalAlignment="Left" Margin="585,355,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click_3"/>
     </Grid>
 </Window>

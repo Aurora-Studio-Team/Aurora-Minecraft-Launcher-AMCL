@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,39 @@ namespace AuroraMinecarftLauncher.Pages
         public Settings()
         {
             InitializeComponent();
+
+            Url1.Navigate("https://afdian.net/a/thzstudent");
+        }
+
+        public class Data1
+        {
+            public int java { get; set; }
+            public int MemoryTextbox { get; set; }
+        }
+
+        private void ULA_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://amcl.thzstudent.top/doc/ula.html");
+        }
+        // GitHub
+        private void GitHub_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://github.com/Aurora-Studio-Team/Aurora-Minecarft-Launcher-AMCL");
+        }
+        // Gitee
+        private void Gitee_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://gitee.com/THZtx/Aurora-Minecarft-Launcher-AMCL");
+        }
+        // GW
+        private void GW_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://amcl.thzstudent.top");
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
