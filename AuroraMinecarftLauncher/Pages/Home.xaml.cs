@@ -28,14 +28,10 @@ namespace AuroraMinecarftLauncher.Pages
         public Account UserInfo { get; private set; }
 
         public static LauncherCore Core = LauncherCore.Create();
-
-        private Settings.Data1 d1;
         public Home()
         {
             InitializeComponent();
-            d1 = new Settings.Data1();
-
-
+            
             // 自动寻找版本
             var versions = Core.GetVersions().ToArray();
             version.ItemsSource = versions;//绑定数据源
@@ -44,28 +40,28 @@ namespace AuroraMinecarftLauncher.Pages
             // 自动寻找Java
             var javaInfo = JavaUtil.GetJavas();
             string javaPath = javaInfo.First().JavaPath;
-            d1.java.DisplayMemberPath = "JavaLibraryPath";
-            d1.SelectedValuePath = "JavaLibraryPath";
-            d1.ItemsSource = javaInfo;
+            Settings.JavaList.DisplayMemberPath = "JavaLibraryPath";
+            Settings.JavaList.SelectedValuePath = "JavaLibraryPath";
+            Settings.JavaList.ItemsSource = javaInfo;
 
             // 初始选择
             version.SelectedItem = 1;
-            d1.java.SelectedItem = 1;
+            Settings.JavaList.SelectedItem = 1;
         }
 
         // 启动页-离线启动
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (IDTextbox.Text != string.Empty && d1.java.Text != string.Empty && version.Text != string.Empty && MemoryTextbox.Text != string.Empty)
+            if (IDTextbox.Text != string.Empty && Settings.JavaList.Text != string.Empty && version.Text != string.Empty && Settings.MemoryBox.Text != string.Empty)
             {
                 try
                 {
-                    Core.JavaPath = d1.java.SelectedValue + "\\javaw.exe";
+                    Core.JavaPath = Settings.JavaList.SelectedValue + "\\javaw.exe";
                     var ver = (KMCCC.Launcher.Version)version.SelectedItem;
                     var result = Core.Launch(new LaunchOptions
                     {
                         Version = ver, //Ver为Versions里你要启动的版本名字
-                        MaxMemory = Convert.ToInt32(d1.MemoryTextbox.Text), //最大内存，int类型
+                        MaxMemory = Convert.ToInt32(Settings.MemoryBox.Text), //最大内存，int类型
                         Authenticator = new KMCCC.Authentication.OfflineAuthenticator(IDTextbox.Text), //离线启动，ZhaiSoul那儿为你要设置的游戏名
                         //Authenticator = new YggdrasilLogin("邮箱", "密码", false), // 正版启动，最后一个为是否twitch登录
                         Mode = LaunchMode.MCLauncher,
@@ -129,9 +125,9 @@ namespace AuroraMinecarftLauncher.Pages
                     Height = 800,
                     IsFullscreen = false
                 },
-                JvmConfig = new JvmConfig(d1.java.SelectedValue + "\\javaw.exe")
+                JvmConfig = new JvmConfig(Settings.JavaList.SelectedValue + "\\javaw.exe")
                 {
-                    MaxMemory = int.Parse(d1.MemoryTextbox.Text),
+                    MaxMemory = int.Parse(Settings.MemoryBox.Text),
                     MinMemory = 0
                 },
                 IsEnableIndependencyCore = true//是否启用版本隔离

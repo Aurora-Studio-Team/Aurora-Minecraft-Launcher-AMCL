@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Home" Height="450" Width="800">
     <Grid>
-        <ComboBox HorizontalAlignment="Left" Height="30" Margin="530,375,0,0" VerticalAlignment="Top" Width="160" x:Name="version" DisplayMemberPath="Id" SelectionChanged="ComboBox_SelectionChanged" RenderTransformOrigin="0.506,0.575"/>
+        <ComboBox HorizontalAlignment="Left" Height="30" Margin="530,375,0,0" VerticalAlignment="Top" Width="160" x:Name="version" DisplayMemberPath="Id" RenderTransformOrigin="0.506,0.575"/>
         <Label Content="选择版本" HorizontalAlignment="Left" Height="30" Margin="535,340,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="0.115,0.899"/>
         <TabControl HorizontalAlignment="Left" Height="313" Margin="478,22,0,0" VerticalAlignment="Top" Width="282">
             <TabItem Header="微软登录" Margin="22,0,-22,0">

@@ -15,8 +15,8 @@
                 <Grid>
                     <Label Content="选择Java" Height="29" Margin="13,42,0,0" VerticalAlignment="Top" Width="93" HorizontalAlignment="Left"/>
                     <Label Content="设置最大内存(单位：MB)" HorizontalAlignment="Left" Height="29" Margin="8,7,0,0" VerticalAlignment="Top" Width="168"/>
-                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="119,41,0,0" VerticalAlignment="Top" Width="457" x:Name="java" SelectionChanged="javaCombo_SelectionChanged"/>
-                    <TextBox HorizontalAlignment="Left" Height="25" Margin="186,6,0,0" TextWrapping="Wrap" Text="1024" VerticalAlignment="Top" Width="169" x:Name="MemoryTextbox" TextChanged="MemoryTextbox_TextChanged"/>
+                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="119,41,0,0" VerticalAlignment="Top" Width="457" x:Name="Java"/>
+                    <TextBox HorizontalAlignment="Left" Height="25" Margin="186,6,0,0" TextWrapping="Wrap" Text="1024" VerticalAlignment="Top" Width="169" x:Name="MemoryTextbox"/>
                 </Grid>
             </TabItem>
             <TabItem Header="启动器设置">
