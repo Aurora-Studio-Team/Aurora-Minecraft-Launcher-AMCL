@@ -8,8 +8,12 @@
 [![](https://img.shields.io/badge/License-GPL3.0-A31F34?logo=CSharp&logoColor=ffffff&style=for-the-badge)](https://github.com/Aurora-Studio-Team/Aurora-Minecarft-Launcher-AMCL/blob/master/LICENSE.txt)
 
 ## 使用的NuGet包与开源项目
-[KMCCC](https://github.com/MineStudio/KMCCC)
+KMCCC
 
-[StarLight.Core](https://github.com/Ink-Marks-Studio/StarLight.Core) [(Nuget)](https://www.nuget.org/packages/StarLight_Core)
+[StarLight.Core](https://github.com/Ink-Marks-Studio/StarLight.Core)
 
-[PanuonUI.Silver](https://github.com/Mochengvia/PanuonUI.Silver)
+HandyControl
+
+Fody
+
+MinecraftLaunch
