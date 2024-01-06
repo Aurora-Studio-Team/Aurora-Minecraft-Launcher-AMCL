@@ -20,11 +20,18 @@ namespace AuroraMinecarftLauncher.Pages
     /// </summary>
     public partial class Settings : Window
     {
+        public static ComboBox JavaList { get; set; }
+        
+        public static TextBox MemoryBox { get; set; }
+        
         public Settings()
         {
             InitializeComponent();
 
             Url1.Navigate("https://afdian.net/a/thzstudent");
+
+            JavaList = Java;
+            MemoryBox = MemoryTextbox;
         }
 
         public class Data1
