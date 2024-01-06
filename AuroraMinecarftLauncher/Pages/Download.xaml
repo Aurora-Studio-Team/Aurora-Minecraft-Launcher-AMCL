@@ -1,4 +1,4 @@
-﻿<Window x:Class="AuroraMinecarftLauncher.Pages.Download"
+﻿<Page x:Class="AuroraMinecarftLauncher.Pages.Download"
         xmlns:iconPacks = "http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,4 +17,4 @@
         <Button Content="安装" HorizontalAlignment="Left" Height="45" Margin="650,355,0,0" VerticalAlignment="Top" Width="115" Click="Button_Click_2" FontSize="20" Background="BlueViolet"/>
         <Button Content="刷新" Height="45" HorizontalAlignment="Left" Margin="585,355,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click_3"/>
     </Grid>
-</Window>
+</Page>

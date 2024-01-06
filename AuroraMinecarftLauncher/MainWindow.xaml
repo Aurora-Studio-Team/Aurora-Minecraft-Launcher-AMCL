@@ -44,8 +44,12 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <ListBox x:Name="dhl" Height="450" Width="150" Margin="0,55,703,3">
-            
+        <ListBox x:Name="dhl" Width="150" Margin="10,55,693,3">
+            <Button Content="启动" Height="40" Width="145" Click="Button_Click"/>
+            <Button Content="下载" Height="40" Width="145" Click="Button_Click_1"/>
+            <Button Content="联机" Height="40" Width="145" Click="Button_Click_2"/>
+            <Button Content="设置" Height="40" Width="145" Click="Button_Click_3"/>
+            <Frame x:Name="tz"/>
         </ListBox>
     </Grid>
 </hc:Window>

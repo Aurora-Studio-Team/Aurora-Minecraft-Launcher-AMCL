@@ -31,7 +31,7 @@ namespace AuroraMinecarftLauncher.Pages
         public Home()
         {
             InitializeComponent();
-            
+
             // 自动寻找版本
             var versions = Core.GetVersions().ToArray();
             version.ItemsSource = versions;//绑定数据源

@@ -1,20 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using AuroraMinecarftLauncher.Pages;
+using System;
 using System.Windows;
-using System.Windows.Controls;
 
 // 导入的模块
-using KMCCC.Launcher;
-using StarLight_Core.Utilities;
-using StarLight_Core.Authentication;
-using MinecraftLaunch.Modules.Models.Launch;
-using MinecraftLaunch.Modules.Models.Auth;
-using System.Net.Http;
-using Newtonsoft.Json.Linq;
-using MinecraftLaunch.Modules.Models.Install;
-using System.Threading.Tasks;
-using MinecraftLaunch.Modules.Installer;
 using System.Windows.Input;
 
 namespace AuroraMinecarftLauncher
@@ -24,17 +12,10 @@ namespace AuroraMinecarftLauncher
     /// </summary>
     public partial class MainWindow
     {
-        public static LaunchConfig LaunchConfig { get; } = new LaunchConfig();
-        public Account UserInfo {get; private set; }
-
-        public static LauncherCore Core = LauncherCore.Create();
-
-        private HttpClient _httpClient;
-
         public MainWindow()
         {
             InitializeComponent();
-
+            tz.NavigationService.Navigate(new Pages.Home());
         }
 
         // Title S
@@ -66,9 +47,36 @@ namespace AuroraMinecarftLauncher
         {
             throw new NotImplementedException();
         }
+
         // Title E
 
         // 导航栏 S
+
+        // home
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Home home = new Home();
+            tz.NavigationService.Navigate(new Pages.Home());
+        }
+
+        // links
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            tz.NavigationService.Navigate(new Pages.Links());
+        }
+
+        // download
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            tz.NavigationService.Navigate(new Pages.Download());
+        }
+
+        // setings
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            tz.NavigationService.Navigate(new Pages.Settings());
+        }
+
 
         // 导航栏 E
     }

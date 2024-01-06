@@ -17,7 +17,7 @@ namespace AuroraMinecarftLauncher.Pages
     /// <summary>
     /// Links.xaml 的交互逻辑
     /// </summary>
-    public partial class Links : Window
+    public partial class Links : Page
     {
         public Links()
         {

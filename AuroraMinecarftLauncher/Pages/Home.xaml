@@ -1,4 +1,4 @@
-﻿<Window x:Class="AuroraMinecarftLauncher.Pages.Home"
+﻿<Page x:Class="AuroraMinecarftLauncher.Pages.Home"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -80,4 +80,4 @@
         </hc:Card>
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="65,40,0,0" TextWrapping="Wrap" Text="公告" VerticalAlignment="Top" Width="65" FontSize="20"/>
     </Grid>
-</Window>
+</Page>

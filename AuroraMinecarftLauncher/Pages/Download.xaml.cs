@@ -19,7 +19,7 @@ namespace AuroraMinecarftLauncher.Pages
     /// <summary>
     /// Download.xaml 的交互逻辑
     /// </summary>
-    public partial class Download : Window
+    public partial class Download : Page
     {
         public Download()
         {

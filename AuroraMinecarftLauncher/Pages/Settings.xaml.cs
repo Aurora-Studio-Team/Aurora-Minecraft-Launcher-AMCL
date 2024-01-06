@@ -18,7 +18,7 @@ namespace AuroraMinecarftLauncher.Pages
     /// <summary>
     /// Settings.xaml 的交互逻辑
     /// </summary>
-    public partial class Settings : Window
+    public partial class Settings : Page
     {
         public static ComboBox JavaList { get; set; }
         
