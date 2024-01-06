@@ -15,7 +15,6 @@ namespace AuroraMinecarftLauncher
         public MainWindow()
         {
             InitializeComponent();
-            tz.NavigationService.Navigate(new Pages.Home());
         }
 
         // Title S
@@ -49,35 +48,5 @@ namespace AuroraMinecarftLauncher
         }
 
         // Title E
-
-        // 导航栏 S
-
-        // home
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Home home = new Home();
-            tz.NavigationService.Navigate(new Pages.Home());
-        }
-
-        // links
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            tz.NavigationService.Navigate(new Pages.Links());
-        }
-
-        // download
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            tz.NavigationService.Navigate(new Pages.Download());
-        }
-
-        // setings
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            tz.NavigationService.Navigate(new Pages.Settings());
-        }
-
-
-        // 导航栏 E
     }
 }

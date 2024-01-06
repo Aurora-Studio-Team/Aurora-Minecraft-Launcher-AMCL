@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StarLight_Core.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.Pkcs;
@@ -20,18 +21,25 @@ namespace AuroraMinecarftLauncher.Pages
     /// </summary>
     public partial class Settings : Page
     {
-        public static ComboBox JavaList { get; set; }
+        public static ComboBox JavaList { get; set; } = new ComboBox();
+        public static TextBox MemoryBox { get; set; } = new TextBox();
         
-        public static TextBox MemoryBox { get; set; }
-        
+
+
         public Settings()
         {
             InitializeComponent();
 
-            Url1.Navigate("https://afdian.net/a/thzstudent");
-
             JavaList = Java;
             MemoryBox = MemoryTextbox;
+
+            // 自动寻找Java
+            var javaInfo = JavaUtil.GetJavas();
+            string javaPath = javaInfo.First().JavaPath;
+            JavaList.DisplayMemberPath = "JavaLibraryPath";
+            JavaList.SelectedValuePath = "JavaLibraryPath";
+            JavaList.ItemsSource = javaInfo;
+            JavaList.SelectedItem = 1;
         }
 
         public class Data1
@@ -60,9 +68,10 @@ namespace AuroraMinecarftLauncher.Pages
             System.Diagnostics.Process.Start("explorer.exe", "https://amcl.thzstudent.top");
         }
 
-        private void Button_Click_7(object sender, RoutedEventArgs e)
+        // ZZ
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            System.Diagnostics.Process.Start("explorer.exe", "https://afdian.net/a/thzstudent");
         }
     }
 }

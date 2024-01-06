@@ -44,12 +44,16 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <ListBox x:Name="dhl" Width="150" Margin="10,55,693,3">
-            <Button Content="启动" Height="40" Width="145" Click="Button_Click"/>
-            <Button Content="下载" Height="40" Width="145" Click="Button_Click_1"/>
-            <Button Content="联机" Height="40" Width="145" Click="Button_Click_2"/>
-            <Button Content="设置" Height="40" Width="145" Click="Button_Click_3"/>
-            <Frame x:Name="tz"/>
-        </ListBox>
+        <TabControl Height="440" Margin="10,55,3,3" TabStripPlacement="Left">
+            <TabItem Height="40" Width="100" Header="启动">
+                <Frame Width="750" Source="Pages/Home.xaml" Margin="0,0,0,-10"/>
+            </TabItem>
+            <TabItem Height="40" Width="100" Header="下载">
+                <Frame Height="450" Width="750" Source="Pages/Download.xaml"/>
+            </TabItem>
+            <TabItem Height="40" Width="100" Header="设置">
+                <Frame Height="450" Width="750" Source="Pages/Settings.xaml"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </hc:Window>

@@ -6,15 +6,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AuroraMinecarftLauncher.Pages"
         mc:Ignorable="d"
-        Title="Download" Height="450" Width="800">
+        Title="Download" Height="440" Width="670">
     <Grid>
         <iconPacks:PackIconJamIcons Kind="Download" Margin="39,36,0,0" Height="40" Width="40" />
-        <TextBlock Text="下载" Margin="94,31,523,357" FontSize="35"/>
+        <TextBlock Text="下载" Margin="94,31,483,357" FontSize="35"/>
         <ListBox x:Name="DownloadList" Margin="45,125,45,99">
 
         </ListBox>
 
-        <Button Content="安装" HorizontalAlignment="Left" Height="45" Margin="650,355,0,0" VerticalAlignment="Top" Width="115" Click="Button_Click_2" FontSize="20" Background="BlueViolet"/>
-        <Button Content="刷新" Height="45" HorizontalAlignment="Left" Margin="585,355,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click_3"/>
+        <Button Content="安装" HorizontalAlignment="Left" Height="45" Margin="534,364,0,0" VerticalAlignment="Top" Width="115" Click="Button_Click_2" FontSize="20" Background="BlueViolet"/>
+        <Button Content="刷新" Height="45" HorizontalAlignment="Left" Margin="474,364,0,0" VerticalAlignment="Top" Width="51" Click="Button_Click_3"/>
     </Grid>
 </Page>

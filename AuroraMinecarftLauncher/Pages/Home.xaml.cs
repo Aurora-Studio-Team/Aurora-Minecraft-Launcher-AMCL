@@ -22,7 +22,7 @@ namespace AuroraMinecarftLauncher.Pages
     /// <summary>
     /// Home.xaml 的交互逻辑
     /// </summary>
-    public partial class Home : Window
+    public partial class Home : Page
     {
         public static LaunchConfig LaunchConfig { get; } = new LaunchConfig();
         public Account UserInfo { get; private set; }
@@ -37,16 +37,10 @@ namespace AuroraMinecarftLauncher.Pages
             version.ItemsSource = versions;//绑定数据源
             version.DisplayMemberPath = "Id";//设置comboBox显示的为版本Id
 
-            // 自动寻找Java
-            var javaInfo = JavaUtil.GetJavas();
-            string javaPath = javaInfo.First().JavaPath;
-            Settings.JavaList.DisplayMemberPath = "JavaLibraryPath";
-            Settings.JavaList.SelectedValuePath = "JavaLibraryPath";
-            Settings.JavaList.ItemsSource = javaInfo;
-
             // 初始选择
             version.SelectedItem = 1;
-            Settings.JavaList.SelectedItem = 1;
+
+            url2.Navigate("https://afdian.net/a/thzstudent");
         }
 
         // 启动页-离线启动

@@ -6,45 +6,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AuroraMinecarftLauncher.Pages"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="800">
+        Title="Settings" Height="440" Width="670">
     <Grid>
         <iconPacks:PackIconIonicons Kind="SettingsMD" Margin="29,33,0,0" Height="40" Width="40" RenderTransformOrigin="1,0.395" />
         <TextBlock HorizontalAlignment="Left" Height="47" Margin="80,30,0,0" TextWrapping="Wrap" Text="设置" VerticalAlignment="Top" Width="79" FontSize="35"/>
-        <TabControl HorizontalAlignment="Left" Height="612" Margin="39,75,0,0" VerticalAlignment="Top" Width="731">
+        <TabControl HorizontalAlignment="Left" Height="359" Margin="29,75,0,0" VerticalAlignment="Top" Width="625">
             <TabItem Header="游戏设置">
                 <Grid>
-                    <Label Content="选择Java" Height="29" Margin="13,42,0,0" VerticalAlignment="Top" Width="93" HorizontalAlignment="Left"/>
-                    <Label Content="设置最大内存(单位：MB)" HorizontalAlignment="Left" Height="29" Margin="8,7,0,0" VerticalAlignment="Top" Width="168"/>
-                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="119,41,0,0" VerticalAlignment="Top" Width="457" x:Name="Java"/>
-                    <TextBox HorizontalAlignment="Left" Height="25" Margin="186,6,0,0" TextWrapping="Wrap" Text="1024" VerticalAlignment="Top" Width="169" x:Name="MemoryTextbox"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="启动器设置">
-                <Grid>
-                    <Label Content="Minecarft版本列表获取：" HorizontalAlignment="Left" Margin="20,11,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Height="30" Margin="196,11,0,0" VerticalAlignment="Top" Width="190"/>
-                    <Label Content="整合包命名规则：" HorizontalAlignment="Left" Margin="31,51,0,0" VerticalAlignment="Top"/>
-                    <ComboBox Height="30" Margin="156,51,24,500"/>
-                    <Label Content="优先模组、整合包源：" HorizontalAlignment="Left" Margin="29,91,0,0" VerticalAlignment="Top"/>
-                    <ComboBox Height="30" Margin="186,91,249,460"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="21*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="选择Java" Height="29" Margin="13,42,0,0" VerticalAlignment="Top" Width="93" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                    <Label Content="设置最大内存(单位：MB)" HorizontalAlignment="Left" Height="29" Margin="8,7,0,0" VerticalAlignment="Top" Width="168" Grid.ColumnSpan="2"/>
+                    <ComboBox HorizontalAlignment="Left" Height="28" Margin="19,41,0,0" VerticalAlignment="Top" Width="457" x:Name="Java" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="25" Margin="86,6,0,0" TextWrapping="Wrap" Text="1024" VerticalAlignment="Top" Width="169" x:Name="MemoryTextbox" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="关于">
                 <Grid>
-
                     <Image HorizontalAlignment="Center" Height="60" Margin="0,12,0,0" VerticalAlignment="Top" Source="{StaticResource logo}"/>
                     <Image HorizontalAlignment="Left" Height="60" Margin="15,12,0,0" VerticalAlignment="Top" Source="{StaticResource AS}"/>
-                    <TextBlock Text="Copyright (c) Aurora Studio. &#13; 此软件最终解释权归 Aurora Studio 所有。软件以GPL3.0免费开源。 &#13; 任何人不得以任何形式擅自非法盗取、复制此软件的所有内容。" Margin="20,85,28,440" FontSize="13"/>
+                    <TextBlock Text="Copyright (c) Aurora Studio. &#13; 此软件最终解释权归 Aurora Studio 所有。软件以GPL3.0免费开源。 &#13; 任何人不得以任何形式擅自非法盗取、复制此软件的所有内容。" Margin="20,85,28,187" FontSize="13"/>
                     <Button Content="用户许可与免费条款" HorizontalAlignment="Left" Margin="18,153,0,0" VerticalAlignment="Top" Height="40" Width="130" x:Name="ULA" Click="ULA_Click"/>
-                    <Button Content="GitHub仓库" HorizontalAlignment="Left" Margin="173,153,0,0" VerticalAlignment="Top" Height="40" Width="130" x:Name="GitHub" Click="GitHub_Click"/>
-                    <Button Content="Gitee仓库" HorizontalAlignment="Left" Margin="328,153,0,0" VerticalAlignment="Top" Height="40" Width="130" x:Name="Gitee" Click="Gitee_Click"/>
-                    <Button Content="官网" HorizontalAlignment="Left" Margin="475,153,0,0" VerticalAlignment="Top" Height="40" Width="65" x:Name="GW" Click="GW_Click"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="赞助">
-                <Grid>
-                    <WebBrowser HorizontalAlignment="Left" Height="305" VerticalAlignment="Top" Width="715" x:Name="Url1" Margin="6,21,0,0"/>
-                    <TextBlock HorizontalAlignment="Left" Height="15" Margin="16,1,0,0" TextWrapping="Wrap" Text="*此服务器由爱发电提供，与本软件无关！" VerticalAlignment="Top" Width="250"/>
+                    <Button Content="GitHub仓库" HorizontalAlignment="Left" Margin="155,153,0,0" VerticalAlignment="Top" Height="40" Width="130" x:Name="GitHub" Click="GitHub_Click"/>
+                    <Button Content="Gitee仓库" HorizontalAlignment="Left" Margin="290,153,0,0" VerticalAlignment="Top" Height="40" Width="130" x:Name="Gitee" Click="Gitee_Click"/>
+                    <Button Content="官网" HorizontalAlignment="Left" Margin="430,153,0,0" VerticalAlignment="Top" Height="40" Width="70" x:Name="GW" Click="GW_Click"/>
+                    <Button Content="赞助" Height="40" Width="70" HorizontalAlignment="Left" Margin="515,153,0,0" VerticalAlignment="Top" Click="Button_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

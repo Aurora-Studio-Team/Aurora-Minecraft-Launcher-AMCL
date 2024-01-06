@@ -6,11 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AuroraMinecarftLauncher.Pages"
         mc:Ignorable="d"
-        Title="Home" Height="450" Width="800">
+        Title="Home" Height="440" Width="670">
     <Grid>
-        <ComboBox HorizontalAlignment="Left" Height="30" Margin="530,375,0,0" VerticalAlignment="Top" Width="160" x:Name="version" DisplayMemberPath="Id" RenderTransformOrigin="0.506,0.575"/>
-        <Label Content="选择版本" HorizontalAlignment="Left" Height="30" Margin="535,340,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="0.115,0.899"/>
-        <TabControl HorizontalAlignment="Left" Height="313" Margin="478,22,0,0" VerticalAlignment="Top" Width="282">
+        <ComboBox HorizontalAlignment="Left" Height="30" Margin="419,369,0,0" VerticalAlignment="Top" Width="160" x:Name="version" DisplayMemberPath="Id" RenderTransformOrigin="0.506,0.575"/>
+        <Label Content="选择版本" HorizontalAlignment="Left" Height="30" Margin="416,334,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="0.115,0.899"/>
+        <TabControl HorizontalAlignment="Left" Height="313" Margin="364,11,0,0" VerticalAlignment="Top" Width="282">
             <TabItem Header="微软登录" Margin="22,0,-22,0">
                 <Grid Margin="0,0,13,0">
                     <Grid.ColumnDefinitions>
@@ -73,11 +73,7 @@
                 </TabControl>
             </TabItem>
         </TabControl>
-        <hc:Card Margin="65,70,435,225" Width="300">
-            <Grid Margin="2,0,-2,0">
-                <WebBrowser HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="280" x:Name="Url2"/>
-            </Grid>
-        </hc:Card>
-        <TextBlock HorizontalAlignment="Left" Height="25" Margin="65,40,0,0" TextWrapping="Wrap" Text="公告" VerticalAlignment="Top" Width="65" FontSize="20"/>
+        <WebBrowser x:Name="url2" Source="https://amcl.thzstudent.top/api/g" Margin="14,74,336,186"/>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="19,44,0,0" TextWrapping="Wrap" Text="公告" VerticalAlignment="Top" Width="65" FontSize="20"/>
     </Grid>
 </Page>
