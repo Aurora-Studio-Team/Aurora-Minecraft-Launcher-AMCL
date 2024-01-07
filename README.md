@@ -10,7 +10,7 @@
 ## 使用的NuGet包与开源项目
 KMCCC
 
-[StarLight.Core](https://github.com/Ink-Marks-Studio/StarLight.Core)
+StarLight.Core
 
 HandyControl
 
