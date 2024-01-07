@@ -73,7 +73,7 @@
                 </TabControl>
             </TabItem>
         </TabControl>
-        <WebBrowser x:Name="url2" Source="https://amcl.thzstudent.top/api/g" Margin="14,74,336,186"/>
+        <WebBrowser x:Name="url" Margin="14,74,336,186"/>
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="19,44,0,0" TextWrapping="Wrap" Text="公告" VerticalAlignment="Top" Width="65" FontSize="20"/>
     </Grid>
 </Page>

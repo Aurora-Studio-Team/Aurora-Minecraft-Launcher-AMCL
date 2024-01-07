@@ -6,16 +6,9 @@ using System.Windows.Controls;
 
 // 导入的模块
 using KMCCC.Launcher;
-using StarLight_Core.Utilities;
 using StarLight_Core.Authentication;
 using MinecraftLaunch.Modules.Models.Launch;
 using MinecraftLaunch.Modules.Models.Auth;
-using System.Net.Http;
-using Newtonsoft.Json.Linq;
-using MinecraftLaunch.Modules.Models.Install;
-using System.Threading.Tasks;
-using MinecraftLaunch.Modules.Installer;
-using System.Windows.Input;
 
 namespace AuroraMinecarftLauncher.Pages
 {
@@ -40,7 +33,7 @@ namespace AuroraMinecarftLauncher.Pages
             // 初始选择
             version.SelectedItem = 1;
 
-            url2.Navigate("https://afdian.net/a/thzstudent");
+            url.Navigate("https:/amcl.thzstudent.top/api/g/");
         }
 
         // 启动页-离线启动
